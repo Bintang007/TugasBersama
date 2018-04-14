@@ -1,6 +1,7 @@
 /*
  * Harap diperhatikan baik baik jika ingin merubah source code
  * Jika ingin merubah harap diberikan penjelasan
+ * Linsesi menggunakan MIT Lisence (LIsensi jangan dirubah)
  */
 
 package sayatv;
