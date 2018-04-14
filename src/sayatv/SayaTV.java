@@ -1,5 +1,5 @@
 /*
- * Harap perhatikan baik baik jika ingin merubah source code
+ * Harap diperhatikan baik baik jika ingin merubah source code
  * Jika ingin merubah harap diberikan penjelasan
  */
 
