@@ -35,7 +35,10 @@ public class SayaTV {
     //ArrayList dataPaketSaluranTV = new ArrayList();
     static String dataPaketSaluranTV[][] = new String[100][100];
     static ArrayList dataPelanggan = new ArrayList();
-    //static ArrayList namaPaket = new ArrayList();
+    static ArrayList dataMasaAktifPaket = new ArrayList();
+    static String[][] dataValidasiPembelianPaket = new String[100][100];
+//    static String[][] dataPembelianPaket = new String[100][100];
+    //static String dataBeliPaket[][] = new String[100][100];
     String paketSaluranTV;
     String saluranTV;
     String harga;
@@ -83,7 +86,6 @@ public class SayaTV {
         data.noHP = Long.valueOf(input.read.readLine());
         System.out.print("Masukkan hobi     : ");
         data.hobi = input.read.readLine();
-
     }
 
     static void menuAwal() throws IOException {
@@ -114,6 +116,8 @@ public class SayaTV {
             default:
                 garisTepi();
                 noPilihan();
+                garisTepi();
+                System.out.println();
         }
     }
 
@@ -245,17 +249,17 @@ public class SayaTV {
     }
 
     static void lupaPassword() throws IOException {
-
+        boolean kondisiLupaPassword = true;
         System.out.print("Masukkan ID   : ");
         String id = input.read.readLine();
         System.out.print("Masukkan hobi : ");
         String hobi = input.read.readLine();
         garisTepi();
         System.out.println();
-        if (((dataIdUser.contains(id) || dataIdAdmin.contains(id))) && ((!dataIdUser.isEmpty() || !dataIdAdmin.isEmpty()))) {
-            int i = user.dataHobi.indexOf(hobi);
-            int j = admin.dataHobi.indexOf(hobi);
-            if ((String.valueOf(user.dataHobi.get(i)).equalsIgnoreCase(hobi)) || (String.valueOf(admin.dataHobi.get(j))).equalsIgnoreCase(hobi)) {
+        if (((dataIdUser.contains(id) || dataIdAdmin.contains(id)))) {
+            int i = dataIdUser.indexOf(id);
+            int j = dataIdAdmin.indexOf(id);
+            if ((hobi.equalsIgnoreCase(String.valueOf(user.dataHobi.get(i)))) || hobi.equalsIgnoreCase(String.valueOf(admin.dataHobi.get(j)))) {
                 do {
                     garisTepi();
                     System.out.print("Password baru       : ");
@@ -272,21 +276,21 @@ public class SayaTV {
                             admin.dataPassword.set(j, password);
                         }
                         System.out.println("Password berhasil diubah");
-                        kondisi = false;
+                        kondisiLupaPassword = false;
                     } else {
                         System.out.println("Ulangi lagi");
                     }
                     garisTepi();
                     System.out.println();
-                } while (kondisi);
+                } while (kondisiLupaPassword);
             } else {
-                System.out.println("Id dan hobi tidak ditemukan");
+                System.out.println("Id atau hobi salah");
                 garisTepi();
                 System.out.println();
             }
         } else {
             garisTepi();
-            System.out.println("Id dan hobi tidak ditemukan");
+            System.out.println("Id atau hobi salah");
             garisTepi();
             System.out.println();
         }
@@ -312,19 +316,19 @@ public class SayaTV {
                 break;
             case 2:
                 System.out.println("======= Beli Paket =======");
-                beliPaket(alamatKantor, noRekeningKantor, noTelpKantor);
+                beliPaket(alamatKantor, noRekeningKantor, noTelpKantor, i);
                 break;
             case 3:
-                garisTepi();
-                System.out.println("Maaf menu belum tersedia");
-//                System.out.println("==== Info Berlangganan ===");
-//                infoPaketBerlangganan();
+//                garisTepi();
+//                System.out.println("Maaf menu belum tersedia");
+                System.out.println("==== Info Berlangganan ===");
+                infoPaketBerlangganan(i);
                 break;
             case 4:
-                garisTepi();
-                System.out.println("Maaf menu belum tersedia");
-//                System.out.println("== Berhenti Berlangganan =");
-//                berhentiPaket();
+//                garisTepi();
+//                System.out.println("Maaf menu belum tersedia");
+                System.out.println("== Berhenti Berlangganan =");
+                berhentiPaket(i);
                 break;
             case 5:
                 System.out.println("======== Info Akun =======");
@@ -413,35 +417,38 @@ public class SayaTV {
                 }
                 System.out.format("     Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(i))));
                 System.out.println();
+                System.out.format("     Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(i))));
+                System.out.println();
             }
         }
     }
 
-    static void beliPaket(String tempat, long noRekening, long noTelp) throws IOException {
+    static void beliPaket(String tempat, long noRekening, long noTelp, int a) throws IOException {
         daftarPaket("tersedia");
         if (!dataPaket.isEmpty()) {
             System.out.print("Pilih paket: ");
             int pilihan = Integer.valueOf(input.read.readLine());
-            String abc = String.valueOf(dataPaket.get(pilihan));
+            //dataBeliPaket[a][a] = String.valueOf(dataPaket.get(pilihan));
             garisTepi();
             System.out.println();
             if (pilihan <= dataPaket.size() && pilihan > 0) {
                 garisTepi();
                 System.out.println("Mode pembayaran: ");
-                System.out.println("[1]. Bayar langsung ke tempat");
+                System.out.println("[1]. Bayar langsung ke kantor");
                 System.out.println("[2]. Via ATM");
+                System.out.print("Pilih: ");
                 int i = Integer.valueOf(input.read.readLine());
                 garisTepi();
                 System.out.println();
                 garisTepi();
                 switch (i) {
                     case 1:
-                        System.out.println("Pembayaran di " + tempat);
+                        System.out.println("Pembayaran langsung dibayarkan di " + tempat);
                         break;
                     case 2:
-                        System.out.println("Pembayaran dikirim ke nomer" + noTelp);
+                        System.out.println("Pembayaran dikirim ke nomer rekening " + noRekening);
                         System.out.println("Setelah selesai silahkan upload foto");
-                        System.out.println("bukti pembayaran dan id Anda ke nomor" + noRekening);
+                        System.out.println("bukti pembayaran dan id Anda ke nomor telepon " + noTelp);
                         System.out.println("guna memvalidasi pembayaran");
                         break;
                     default:
@@ -455,12 +462,45 @@ public class SayaTV {
 
     }
 
-    static void infoPaketBerlangganan() {
-
+    static void infoPaketBerlangganan(int i) {
+        int n = 1;
+        if (dataPelanggan.contains(dataIdUser.get(i))) {
+            int j = dataPelanggan.indexOf(dataIdUser.get(i));
+            for (int k = 0; k < dataValidasiPembelianPaket[j].length; k++) {
+                if (dataPaket.contains(dataValidasiPembelianPaket[j][k])) {
+                    //int n = 1;
+                    int l = dataPaket.indexOf(dataValidasiPembelianPaket[j][k]);
+                    System.out.format("[%d]. Paket %s\n", n, String.valueOf(dataPaket.get(l)));
+                    System.out.println("     Saluran TV : ");
+                    for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
+                        if (dataPaketSaluranTV[l][m] != null) {
+                            System.out.format("     %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
+                        }
+                    }
+                    System.out.format("     Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(l))));
+                    System.out.println();
+                    System.out.format("     Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
+                    System.out.println();
+                    n++;
+                }
+            }
+        } else {
+            System.out.println("Anda belum membeli paket atau ");
+            System.out.println("pembayaran belum divalidasi");
+        }
     }
 
-    static void berhentiPaket() {
-
+    static void berhentiPaket(int i) throws IOException {
+        infoPaketBerlangganan(i);
+        if (dataPelanggan.contains(dataIdUser.get(i))) {
+            System.out.print("Pilih: ");
+            int pilihan = Integer.valueOf(input.read.readLine());
+            dataValidasiPembelianPaket[i][pilihan - 1] = null;
+            garisTepi();
+            System.out.format("Paket ke%d sukses diberhentikan", pilihan);
+        } else {
+            System.out.println("Tidak ada paket yang aktif");
+        }
     }
 
     static void daftarPelanggan() {
@@ -475,6 +515,25 @@ public class SayaTV {
                 System.out.format("Hobi   : %s\n", user.dataHobi.get(j));
                 System.out.format("No. HP : %d\n", user.dataNoHP.get(j));
                 System.out.format("Email  : %s\n", user.dataEmail.get(j));
+                System.out.println("Paket yang aktif: ");
+                for (int k = 0; k < dataValidasiPembelianPaket[i].length; k++) {
+                    if (dataPaket.contains(dataValidasiPembelianPaket[i][k])) {
+                        int n = 1;
+                        int l = dataPaket.indexOf(dataValidasiPembelianPaket[i][k]);
+                        System.out.format("[%d]. Paket %s\n", n, String.valueOf(dataPaket.get(l)));
+                        System.out.println("     Saluran TV : ");
+                        for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
+                            if (dataPaketSaluranTV[l][m] != null) {
+                                System.out.format("     %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
+                            }
+                        }
+                        System.out.format("     Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(l))));
+                        System.out.println();
+                        System.out.format("     Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
+                        System.out.println();
+                        n++;
+                    }
+                }
             }
         }
     }
@@ -500,11 +559,15 @@ public class SayaTV {
         } else {
             System.out.print("Nama paket: ");
             data.paket = input.read.readLine();
+            garisTepi();
+            System.out.println();
             if (dataPaket.contains(data.paket)) {
+                garisTepi();
                 System.out.println("Nama paket sudah digunakan");
             } else {
+                dataPaket.add(data.paket);
                 do {
-                    dataPaket.add(data.paket);
+                    garisTepi();
                     daftarSaluranTV();
                     System.out.print("Pilih saluran TV: ");
                     int i = Integer.valueOf(input.read.readLine());
@@ -532,9 +595,13 @@ public class SayaTV {
                         System.out.println("Ulangi lagi");
                     }
                 } while (kondisiAddPaket);
+                garisTepi();
                 System.out.print("Harga paket: ");
                 data.harga = input.read.readLine();
                 dataHarga.add(data.harga);
+                System.out.print("Masa aktif paket(hari): ");
+                int hari = Integer.valueOf(input.read.readLine());
+                dataMasaAktifPaket.add(hari);
                 garisTepi();
                 System.out.println();
                 garisTepi();
@@ -544,14 +611,46 @@ public class SayaTV {
     }
 
     static void addSaluranTV() throws IOException {
-        System.out.print("Masukkan saluran TV: ");
-        data.saluranTV = input.read.readLine();
-        int i = dataSaluranTV.size();
-        dataSaluranTV.add(data.saluranTV);
-        garisTepi();
-        System.out.println();
-        garisTepi();
-        System.out.format("Saluran ke-%d telah tersimpan\n", i + 1);
+        boolean kondisiAddSaluranTV = true;
+        do {
+            boolean kondisiAddSaluranTV1 = true;
+            System.out.print("Masukkan saluran TV: ");
+            data.saluranTV = input.read.readLine();
+            if (dataSaluranTV.contains(data.saluranTV)) {
+                garisTepi();
+                System.out.println();
+                garisTepi();
+                System.out.println("Saluran TV sudah ditambahkan");
+                System.out.println("Ulangi lagi");
+                garisTepi();
+                System.out.println();
+                garisTepi();
+            } else {
+                dataSaluranTV.add(data.saluranTV);
+                garisTepi();
+                System.out.println();
+                garisTepi();
+                System.out.format("Saluran ke-%d telah tersimpan\n", dataSaluranTV.size());
+                garisTepi();
+                System.out.println();
+                do {
+                    garisTepi();
+                    System.out.print("Masukkan lagi?(Y/N) ");
+                    String pilihan = input.read.readLine();
+                    if (pilihan.equalsIgnoreCase("y")) {
+                        kondisiAddSaluranTV1 = false;
+                        garisTepi();
+                        System.out.println();
+                        garisTepi();
+                    } else if (pilihan.equalsIgnoreCase("n")) {
+                        kondisiAddSaluranTV = false;
+                        kondisiAddSaluranTV1 = false;
+                    } else {
+                        System.out.println();
+                    }
+                } while (kondisiAddSaluranTV1);
+            }
+        } while (kondisiAddSaluranTV);
     }
 
     static void infoAkunUser(int i) throws IOException {
@@ -573,12 +672,35 @@ public class SayaTV {
     static void validasiPembayaran() throws IOException {
         System.out.print("Masukkan id user yang telah membayar: ");
         validasi = input.read.readLine();
+        System.out.print("Masukkan nama paket yang dibeli: ");
+        String namaPaket = input.read.readLine();
         garisTepi();
         System.out.println();
         garisTepi();
         if (dataIdUser.contains(validasi)) {
-            dataPelanggan.add(validasi);
-            System.out.println("Validasi sukses");
+            if (dataPaket.contains(namaPaket)) {
+                if (dataPelanggan.contains(validasi)) {
+                    int i = dataPelanggan.indexOf(validasi);
+                    for (int j = 0; j < dataValidasiPembelianPaket[i].length; j++) {
+                        if (dataValidasiPembelianPaket[i][j] == null) {
+                            dataValidasiPembelianPaket[i][j] = namaPaket;
+                            break;
+                        }
+                    }
+                } else {
+                    dataPelanggan.add(validasi);
+                    int i = dataPelanggan.size() - 1;
+                    for (int j = 0; j < dataValidasiPembelianPaket[i].length; j++) {
+                        if (dataValidasiPembelianPaket[i][j] == null) {
+                            dataValidasiPembelianPaket[i][j] = namaPaket;
+                            break;
+                        }
+                    }
+                }
+                System.out.println("Validasi sukses");
+            } else {
+                System.out.println("Nama Paket tidak ditemukan");
+            }
         } else {
             System.out.println("Id user tidak ditemukan");
         }
@@ -609,6 +731,9 @@ public class SayaTV {
                     garisTepi();
                     System.out.println("Informasi kantor masih kosong");
                     System.out.println("Harap diisi");
+                    garisTepi();
+                    System.out.println();
+                    garisTepi();
                     System.out.print("Masukkan alamat kantor sayaTV       : ");
                     alamatKantor = input.read.readLine();
                     System.out.print("Masukkan no. rekening kantor sayaTV : ");
