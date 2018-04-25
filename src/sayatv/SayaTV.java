@@ -46,13 +46,13 @@ public class SayaTV {
     String email;
     String pilihan;
     String hobi;
-    long noHP;
+    String noHP;
     boolean autentikasi;
     int indeks;
     static String validasi;
     static String alamatKantor;
-    static long noRekeningKantor;
-    static long noTelpKantor;
+    static String noRekeningKantor;
+    static String noTelpKantor;
     static SayaTV data = new SayaTV();
     static SayaTV input = new SayaTV();
     static SayaTV signIn = new SayaTV();
@@ -64,7 +64,7 @@ public class SayaTV {
     static boolean kondisi = true;
 
     static void garisTepi() {
-        System.out.println("==========================");
+        System.out.println("=========================================");
     }
 
     static void pilihanTidakTersedia() {
@@ -79,13 +79,13 @@ public class SayaTV {
         System.out.print("Masukkan email    : ");
         data.email = input.read.readLine();
         System.out.print("Masukkan no-HP    : ");
-        data.noHP = Long.valueOf(input.read.readLine());
+        data.noHP = input.read.readLine();
         System.out.print("Masukkan hobi     : ");
         data.hobi = input.read.readLine();
     }
 
     static void menuSelamatDatang() throws IOException {
-        System.out.println("===== Selamat Datang =====");
+        System.out.println("==============  Selamat Datang  ==============");
         System.out.println("[1]. SignIn");
         System.out.println("[2]. SignUp");
         System.out.println("[3]. Lupa password");
@@ -96,14 +96,14 @@ public class SayaTV {
         System.out.println();
         switch (pilihan) {
             case 1:
-                System.out.println("========= SignIn =========");
+                System.out.println("=================  SignIn  ==================");
                 signIn();
                 break;
             case 2:
                 signUp();
                 break;
             case 3:
-                System.out.println("====== Lupa password =====");
+                System.out.println("===============  Lupa password  ==============");
                 lupaPassword();
                 break;
             case 4:
@@ -120,19 +120,19 @@ public class SayaTV {
     static void signUp() throws IOException {
         boolean kondisiSignUp = true;
         do {
-            System.out.println("========= SignUp =========");
+            System.out.println("=================  SignUp  =================");
             System.out.print("Daftar sebagai (admin/user) ");
             String jawaban = input.read.readLine();
             garisTepi();
             System.out.println();
             if (jawaban.equalsIgnoreCase("admin")) {
-                System.out.println("========= SignUp =========");
+                System.out.println("=================  SignUp  =================");
                 System.out.print("Masukkan kode admin(didapatkan dari developer): ");
                 String kode = input.read.readLine();
                 garisTepi();
                 System.out.println();
                 if (kode.equals("A23uu!!@j")) {
-                    System.out.println("========= SignUp =========");
+                    System.out.println("=================  SignUp  =================");
                     formulirPendaftaran();
                     System.out.print("Masukkan ID Admin : ");
                     signUp.Id = input.read.readLine();
@@ -166,7 +166,7 @@ public class SayaTV {
                 garisTepi();
                 System.out.println();
             } else if (jawaban.equalsIgnoreCase("user")) {
-                System.out.println("========= SignUp =========");
+                System.out.println("=================  SignUp  =================");
                 formulirPendaftaran();
                 System.out.print("Masukkan ID User  : ");
                 signUp.Id = input.read.readLine();
@@ -319,7 +319,7 @@ public class SayaTV {
     }
 
     static void menuUser(int i) throws IOException {
-        System.out.println("====== Menu Layanan ======");
+        System.out.println("===============  Menu Layanan  ===============");
         System.out.println("[1]. Daftar paket");
         System.out.println("[2]. Beli paket berlangganan");
         System.out.println("[3]. Info paket berlangganan");
@@ -333,27 +333,27 @@ public class SayaTV {
         System.out.println();
         switch (pilihan) {
             case 1:
-                System.out.println("====== Daftar Paket ======");
+                System.out.println("===============  Daftar Paket  ===============");
                 daftarPaket("tersedia");
                 break;
             case 2:
-                System.out.println("======= Beli Paket =======");
+                System.out.println("================  Beli Paket  ================");
                 beliPaket(alamatKantor, noRekeningKantor, noTelpKantor, i);
                 break;
             case 3:
-                System.out.println("==== Info Berlangganan ===");
+                System.out.println("===========  Info Berlangganan  ==============");
                 infoPaketBerlangganan(i);
                 break;
             case 4:
-                System.out.println("== Berhenti Berlangganan =");
+                System.out.println("===========  Berhenti Berlangganan  ==========");
                 berhentiPaket(i);
                 break;
             case 5:
-                System.out.println("======== Info Akun =======");
+                System.out.println("=================  Info Akun  ================");
                 infoAkunUser(i);
                 break;
             case 6:
-                System.out.println("======= Info Kantor ======");
+                System.out.println("===============  Info Kantor  ================");
                 infoKantor();
                 break;
             case 7:
@@ -366,7 +366,7 @@ public class SayaTV {
     }
 
     static void menuAdmin(int i) throws IOException {
-        System.out.println("====== Menu Layanan ======");
+        System.out.println("===============  Menu Layanan  ===============");
         System.out.println("[1]. Daftar & Info Pelanggan");
         System.out.println("[2]. Daftar Paket");
         System.out.println("[3]. Daftar Saluran TV");
@@ -382,35 +382,35 @@ public class SayaTV {
         System.out.println();
         switch (pilihan) {
             case 1:
-                System.out.println("=== Daftar & Info Pelanggan ===");
+                System.out.println("==========  Daftar & Info Pelanggan  =========");
                 daftarInfoPelanggan();
                 break;
             case 2:
-                System.out.println("====== Daftar Paket ======");
+                System.out.println("===============  Daftar Paket  ===============");
                 daftarPaket("ditambahkan");
                 break;
             case 3:
-                System.out.println("==== Daftar Saluran TV ===");
+                System.out.println("============  Daftar Saluran TV  =============");
                 daftarSaluranTV();
                 break;
             case 4:
-                System.out.println("===== Tambahkan Paket ====");
+                System.out.println("==============  Tambahkan Paket  =============");
                 tambahPaket();
                 break;
             case 5:
-                System.out.println("== Tambahkan Saluran TV ==");
+                System.out.println("===========  Tambahkan Saluran TV  ===========");
                 tambahSaluranTV();
                 break;
             case 6:
-                System.out.println("== Validasi Pembayaran ===");
+                System.out.println("===========  Validasi Pembayaran  ============");
                 validasiPembayaran();
                 break;
             case 7:
-                System.out.println("======== Info Akun =======");
+                System.out.println("=================  Info Akun  ================");
                 infoAkunAdmin(i);
                 break;
             case 8:
-                System.out.println("======= Info Kantor ======");
+                System.out.println("===============  Info Kantor  ================");
                 infoKantor();
                 break;
             case 9:
@@ -442,7 +442,7 @@ public class SayaTV {
         }
     }
 
-    static void beliPaket(String tempat, long noRekening, long noTelp, int a) throws IOException {
+    static void beliPaket(String tempat, String noRekening, String noTelp, int a) throws IOException {
         daftarPaket("tersedia");
         if (!dataPaket.isEmpty()) {
             System.out.print("Pilih paket: ");
@@ -467,7 +467,7 @@ public class SayaTV {
                         System.out.println("Pembayaran dikirim ke nomer rekening " + noRekening);
                         System.out.println("Setelah selesai silahkan upload foto");
                         System.out.println("bukti pembayaran, nama paket dan id Anda ke");
-                        System.out.format("nomor telepon %d guna memvalidasi pembayaran\n", noTelp);
+                        System.out.format("nomor telepon %s guna memvalidasi pembayaran\n", noTelp);
                         break;
                     default:
                         pilihanTidakTersedia();
@@ -539,7 +539,7 @@ public class SayaTV {
                 System.out.println("Pelanggan ke-" + (i + 1));
                 System.out.format("  Nama   : %s\n", user.dataNama.get(j));
                 System.out.format("  Alamat : %s\n", user.dataAlamat.get(j));
-                System.out.format("  No. HP : %d\n", user.dataNoHP.get(j));
+                System.out.format("  No. HP : %s\n", user.dataNoHP.get(j));
                 System.out.format("  Email  : %s\n", user.dataEmail.get(j));
                 System.out.println("  Paket yang aktif: ");
                 for (int k = 0; k < dataValidasiPembelianPaket[i].length; k++) {
@@ -690,7 +690,7 @@ public class SayaTV {
         System.out.format("Nama   : %s\n", user.dataNama.get(i));
         System.out.format("Alamat : %s\n", user.dataAlamat.get(i));
         System.out.format("Hobi   : %s\n", user.dataHobi.get(i));
-        System.out.format("No. HP : %d\n", user.dataNoHP.get(i));
+        System.out.format("No. HP : %s\n", user.dataNoHP.get(i));
         System.out.format("Email  : %s\n", user.dataEmail.get(i));
     }
 
@@ -698,7 +698,7 @@ public class SayaTV {
         System.out.format("Nama\t: %s\n", admin.dataNama.get(i));
         System.out.format("Alamat\t: %s\n", admin.dataAlamat.get(i));
         System.out.format("Hobi\t: %s\n", admin.dataHobi.get(i));
-        System.out.format("No. HP\t: %d\n", admin.dataNoHP.get(i));
+        System.out.format("No. HP\t: %s\n", admin.dataNoHP.get(i));
         System.out.format("Email\t: %s\n", admin.dataEmail.get(i));
     }
 
@@ -708,6 +708,7 @@ public class SayaTV {
         if (user.dataId.contains(validasi)) {
             System.out.print("Masukkan nama paket yang dibeli: ");
             String namaPaket = input.read.readLine();
+            namaPaket.toUpperCase();
             garisTepi();
             System.out.println();
             garisTepi();
@@ -745,8 +746,8 @@ public class SayaTV {
     static void infoKantor() throws IOException {
         if (alamatKantor != null) {
             System.out.format("- Alamat kantor        : %s\n", alamatKantor);
-            System.out.format("- No. rekening kantor  : %d\n", noRekeningKantor);
-            System.out.format("- No. telepon kantor   : %d\n", noTelpKantor);
+            System.out.format("- No. rekening kantor  : %s\n", noRekeningKantor);
+            System.out.format("- No. telepon kantor   : %s\n", noTelpKantor);
         } else {
             System.out.println("Informasi kantor belum tersedia");
         }
@@ -774,9 +775,9 @@ public class SayaTV {
                     System.out.print("Masukkan alamat kantor sayaTV       : ");
                     alamatKantor = input.read.readLine();
                     System.out.print("Masukkan no. rekening kantor sayaTV : ");
-                    noRekeningKantor = Integer.valueOf(input.read.readLine());
+                    noRekeningKantor = input.read.readLine();
                     System.out.print("Masukkan no. Telp kantor sayaTV     : ");
-                    noTelpKantor = Integer.valueOf(input.read.readLine());
+                    noTelpKantor = input.read.readLine();
                     garisTepi();
                     System.out.println();
                 }
