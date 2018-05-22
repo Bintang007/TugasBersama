@@ -63,6 +63,10 @@ public class SayaTV {
     static boolean kondisiMain = true;
     static boolean kondisi = true;
 
+    public static void clearConsole() throws IOException, InterruptedException {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    }
+
     static void garisTepi() {
         System.out.println("=========================================");
     }
@@ -84,7 +88,7 @@ public class SayaTV {
         data.hobi = input.read.readLine();
     }
 
-    static void menuSelamatDatang() throws IOException {
+    static void menuSelamatDatang() throws IOException, InterruptedException {
         System.out.println("==============  Selamat Datang  ==============");
         System.out.println("[1]. SignIn");
         System.out.println("[2]. SignUp");
@@ -93,7 +97,8 @@ public class SayaTV {
         System.out.print("Pilih: ");
         int pilihan = Integer.valueOf(input.read.readLine());
         garisTepi();
-        System.out.println();
+//        System.out.println();
+        clearConsole();
         switch (pilihan) {
             case 1:
                 System.out.println("=================  SignIn  ==================");
@@ -483,23 +488,36 @@ public class SayaTV {
         int n = 1;
         if (dataPelanggan.contains(user.dataId.get(i))) {
             int j = dataPelanggan.indexOf(user.dataId.get(i));
-            for (int k = 0; k < dataValidasiPembelianPaket[j].length; k++) {
-                if (dataPaket.contains(dataValidasiPembelianPaket[j][k])) {
-                    int l = dataPaket.indexOf(dataValidasiPembelianPaket[j][k]);
-                    System.out.format("[%d]. Paket %s\n", n, String.valueOf(dataPaket.get(l)));
-                    System.out.println("     Saluran TV : ");
-                    for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
-                        if (dataPaketSaluranTV[l][m] != null) {
-                            System.out.format("         %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
-                        }
-                    }
-                    System.out.format("     Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(l))));
-                    System.out.println();
-                    System.out.format("     Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
-                    System.out.println();
-                    n++;
+            int o = 0;
+            for (int p = 0; p < dataValidasiPembelianPaket[j].length; p++) {
+                if (dataValidasiPembelianPaket[j][p] != null) {
+                    o++;
+
                 }
             }
+            if (o != 0) {
+                for (int k = 0; k < dataValidasiPembelianPaket[j].length; k++) {
+                    if (dataPaket.contains(dataValidasiPembelianPaket[j][k])) {
+                        int l = dataPaket.indexOf(dataValidasiPembelianPaket[j][k]);
+                        System.out.format("[%d]. Paket %s\n", n, String.valueOf(dataPaket.get(l)));
+                        System.out.println("     Saluran TV : ");
+                        for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
+                            if (dataPaketSaluranTV[l][m] != null) {
+                                System.out.format("         %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
+                            }
+                        }
+                        System.out.format("     Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(l))));
+                        System.out.println();
+                        System.out.format("     Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
+                        System.out.println();
+                        n++;
+                    }
+                }
+            } else {
+                System.out.println("Anda belum membeli paket atau ");
+                System.out.println("pembayaran belum divalidasi");
+            }
+
         } else {
             System.out.println("Anda belum membeli paket atau ");
             System.out.println("pembayaran belum divalidasi");
@@ -509,22 +527,27 @@ public class SayaTV {
     static void berhentiPaket(int i) throws IOException {
         infoPaketBerlangganan(i);
         if (dataPelanggan.contains(user.dataId.get(i))) {
-            System.out.print("Pilih: ");
-            int pilihan = Integer.valueOf(input.read.readLine());
-            garisTepi();
-            System.out.println();
-            garisTepi();
-            int k = 0;
-            for (int j = 0; j < dataValidasiPembelianPaket[i].length; j++) {
-                if (dataValidasiPembelianPaket[i][j] != null) {
-                    k++;
+            if (dataValidasiPembelianPaket[dataPelanggan.indexOf(user.dataId.get(i))][0] != null) {
+                System.out.print("Pilih: ");
+                int pilihan = Integer.valueOf(input.read.readLine());
+                garisTepi();
+                System.out.println();
+                garisTepi();
+                int k = 0;
+                for (int j = 0; j < dataValidasiPembelianPaket[i].length; j++) {
+                    if (dataValidasiPembelianPaket[i][j] != null) {
+                        k++;
+                    }
                 }
-            }
-            if (pilihan <= k && pilihan > 0) {
-                dataValidasiPembelianPaket[i][pilihan - 1] = null;
-                System.out.format("Paket ke-%d sukses dihentikan\n", pilihan);
-            } else {
-                pilihanTidakTersedia();
+                if (pilihan <= k && pilihan > 0) {
+                    dataValidasiPembelianPaket[i][pilihan - 1] = null;
+                    System.out.format("Paket ke-%d sukses dihentikan\n", pilihan);
+                    for (int j = pilihan - 1; j < dataValidasiPembelianPaket[i].length - 1; j++) {
+                        dataValidasiPembelianPaket[i][j] = dataValidasiPembelianPaket[i][j + 1];
+                    }
+                } else {
+                    pilihanTidakTersedia();
+                }
             }
         }
     }
@@ -542,23 +565,28 @@ public class SayaTV {
                 System.out.format("  No. HP : %s\n", user.dataNoHP.get(j));
                 System.out.format("  Email  : %s\n", user.dataEmail.get(j));
                 System.out.println("  Paket yang aktif: ");
-                for (int k = 0; k < dataValidasiPembelianPaket[i].length; k++) {
-                    if (dataPaket.contains(dataValidasiPembelianPaket[i][k])) {
-                        int l = dataPaket.indexOf(dataValidasiPembelianPaket[i][k]);
-                        System.out.format("  [%d]. Paket %s\n", n, String.valueOf(dataPaket.get(l)));
-                        System.out.println("       Saluran TV : ");
-                        for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
-                            if (dataPaketSaluranTV[l][m] != null) {
-                                System.out.format("           %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
+                if (dataValidasiPembelianPaket[i][0] != null) {
+                    for (int k = 0; k < dataValidasiPembelianPaket[i].length; k++) {
+                        if (dataPaket.contains(dataValidasiPembelianPaket[i][k])) {
+                            int l = dataPaket.indexOf(dataValidasiPembelianPaket[i][k]);
+                            System.out.format("  [%d]. Paket %s\n", n, String.valueOf(dataPaket.get(l)));
+                            System.out.println("       Saluran TV : ");
+                            for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
+                                if (dataPaketSaluranTV[l][m] != null) {
+                                    System.out.format("           %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
+                                }
                             }
+                            System.out.format("       Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(l))));
+                            System.out.println();
+                            System.out.format("       Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
+                            System.out.println();
+                            n++;
                         }
-                        System.out.format("       Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(l))));
-                        System.out.println();
-                        System.out.format("       Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
-                        System.out.println();
-                        n++;
                     }
+                } else {
+                    System.out.println("  -Tidak ada");
                 }
+
             }
         }
     }
@@ -708,7 +736,7 @@ public class SayaTV {
         if (user.dataId.contains(validasi)) {
             System.out.print("Masukkan nama paket yang dibeli: ");
             String namaPaket = input.read.readLine();
-            namaPaket.toUpperCase();
+            namaPaket = namaPaket.toUpperCase();
             garisTepi();
             System.out.println();
             garisTepi();
@@ -754,8 +782,9 @@ public class SayaTV {
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         do {
+            clearConsole();
             menuSelamatDatang();
             while (user.autentikasi) {
                 menuUser(user.indeks);
