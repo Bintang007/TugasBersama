@@ -1,7 +1,25 @@
 /*
- * Harap diperhatikan baik baik jika ingin merubah source code
- * Jika ingin merubah harap diberikan penjelasan
- * Linsesi menggunakan MIT Lisence (LIsensi jangan dirubah)
+ * The MIT License
+ *
+ * Copyright 2018 STAR.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package sayatv;
 
@@ -12,57 +30,76 @@ import java.util.ArrayList;
 
 /**
  *
- * @penulis timBersama
+ * @author timBersama
  */
 public class SayaTV {
 
-    static InputStreamReader scan = new InputStreamReader(System.in);
-    final BufferedReader read = new BufferedReader(scan);
-    ArrayList dataId = new ArrayList();
-    ArrayList dataPassword = new ArrayList();
-    ArrayList dataEmail = new ArrayList();
-    ArrayList dataAlamat = new ArrayList();
-    ArrayList dataNama = new ArrayList();
-    ArrayList dataNoHP = new ArrayList();
-    ArrayList dataHobi = new ArrayList();
-    static ArrayList dataPaket = new ArrayList();
-    static ArrayList dataHarga = new ArrayList();
-    static ArrayList dataSaluranTV = new ArrayList();
-    static String dataPaketSaluranTV[][] = new String[100][100];
-    static ArrayList dataPelanggan = new ArrayList();
-    static ArrayList dataMasaAktifPaket = new ArrayList();
-    static String[][] dataValidasiPembelianPaket = new String[100][100];
-    String paketSaluranTV;
-    String saluranTV;
-    String harga;
-    String nama;
-    String Id;
-    String password;
-    String alamat;
-    String paket;
-    String email;
-    String pilihan;
-    String hobi;
-    String noHP;
-    boolean autentikasi;
-    int indeks;
-    static String validasi;
-    static String alamatKantor;
-    static String noRekeningKantor;
-    static String noTelpKantor;
-    static SayaTV data = new SayaTV();
-    static SayaTV input = new SayaTV();
-    static SayaTV signIn = new SayaTV();
-    static SayaTV signUp = new SayaTV();
-    static SayaTV lupaPassword = new SayaTV();
-    static SayaTV user = new SayaTV();
-    static SayaTV admin = new SayaTV();
-    static boolean kondisiMain = true;
-    static boolean kondisi = true;
-    static boolean kondisiPilihanKembaliAtauUbah;
-    static boolean kondisiPilihanKembaliAtauUbah1;
-    static int pilihanKembaliAtauUbah;
+    // Membuat objek untuk merekam inputan dari keyboard 
+    private static final InputStreamReader SCAN = new InputStreamReader(System.in);
+    private final BufferedReader READ = new BufferedReader(SCAN);
 
+    // Membuat objek - objek yang dibutuhkan untuk menyimpan inputan DATA yang
+    // nantinya sangat dibutuhkan selama menjalankan program
+    private final ArrayList DATA_ID = new ArrayList();
+    private final ArrayList DATA_PASSWORD = new ArrayList();
+    private final ArrayList DATA_EMAIL = new ArrayList();
+    private final ArrayList DATA_ALAMAT = new ArrayList();
+    private final ArrayList DATA_NAMA = new ArrayList();
+    private final ArrayList DATA_NO_HP = new ArrayList();
+    private final ArrayList dataHobi = new ArrayList();
+    private static final ArrayList DATA_PAKET = new ArrayList();
+    private static final ArrayList<Integer> DATA_HARGA = new ArrayList<>();
+    private static final ArrayList DATA_SALURAN_TV = new ArrayList();
+    private static final String[][] DATA_PAKET_SALURAN_TV = new String[100][100];
+    private static final ArrayList DATA_PELANGGAN = new ArrayList();
+    private static final ArrayList<Integer> DATA_MASA_AKTIF_PAKET = new ArrayList<>();
+    private static final String[][] DATA_VALIDASI_PEMBELIAN_PAKET = new String[100][100];
+
+    // Membuat variabel - variabel yang dibutuhkan untuk menampung semantara inputan
+    // DATA sebelum DATA tersebut disimpan
+    private String paketSaluranTV;
+    private String saluranTV;
+    private String nama;
+    private String Id;
+    private String password;
+    private String alamat;
+    private String paket;
+    private String email;
+    private String hobi;
+    private String noHP;
+    private boolean autentikasi;
+    private int indeks;
+    private static String alamatKantor;
+    private static String noRekeningKantor;
+    private static String noTelpKantor;
+
+    // Instansi dan inisialisasi objek dengan konstruktor class SayaTV
+    private static final SayaTV DATA = new SayaTV();
+    private static final SayaTV INPUT = new SayaTV();
+    private static final SayaTV SIGN_IN = new SayaTV();
+    private static final SayaTV SIGN_UP = new SayaTV();
+    private static final SayaTV USER = new SayaTV();
+    private static final SayaTV ADMIN = new SayaTV();
+
+    // Static variabel yang dapat diakses di semua method/function
+    private static boolean kondisiMain = true;
+    private static boolean kondisiPilihanKembali;
+    private static boolean kondisiPilihanUbah;
+    private static int pilihanKembaliAtauUbah;
+
+    /**
+     * Memunculkan pesan yang bertuliskan Selamat Datang dengan ditampilkan
+     * secara bergerak dari kanan ke kiri dalam satu baris atau dapat dikatakan
+     * terlihat seperti pesan berjalan. Untuk menampilkan pesan ini seakan
+     * berjalan maka diharuskan me-run program ini menggunakan terminal apapun
+     * (Contoh: cmd dan windows powershell)
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
     public static void pesanSelamatDatang() throws IOException, InterruptedException {
         for (int i = 0; i < 28; i++) {
             garisTepi();
@@ -76,6 +113,19 @@ public class SayaTV {
         }
     }
 
+    /**
+     * Memunculkan pesan yang bertuliskan Sampai jumpa dengan ditampilkan secara
+     * bergerak dari kanan ke kiri dalam satu baris atau dapat dikatakan
+     * terlihat seperti pesan berjalan. Untuk menampilkan pesan ini seakan
+     * berjalan maka diharuskan me-run program ini menggunakan terminal apapun
+     * (Contoh: cmd dan windows powershell)
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
     public static void pesanSempaiJumpa() throws IOException, InterruptedException {
         for (int i = 0; i < 30; i++) {
             garisTepi();
@@ -89,27 +139,57 @@ public class SayaTV {
         }
     }
 
+    /**
+     * Menghapus semua log yang telah ditampilkan sebelumnya. Untuk dapat
+     * menjalankan fitur ini diharuskan menjalankan program dengan terminal
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
     public static void clearConsole() throws IOException, InterruptedException {
         Thread.sleep(500);
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
     }
 
-    static void garisTepi() {
+    /**
+     * menampikan untaian simbol sama dengan '=' sebanyak 46 buah
+     */
+    public static void garisTepi() {
         System.out.println("==============================================");
     }
 
-    static void pilihanKembaliAtauUbah(boolean kondisiKembali, boolean kondisiEdit, String keterangan, String keteranganMenu) throws IOException, InterruptedException {
+    /**
+     * Menampilkan fitur kembali (untuk kembali ke menu sebelumnya) dan ubah
+     * (untuk mengubah isi dari suatu entitas yang dimaksud)
+     *
+     * @param kondisiKembali jika bernilai benar maka akan menampikan fitur
+     * untuk kembali ke langkah sebelumnya jika tidak maka tidak berlaku
+     * @param kondisiUbah Jika bernilai benar maka akan menampilkan fitur untuk
+     * merubah suatu entitas yang dimaksud
+     * @param keterangan keterangan yang akan ditampilkan pada pilihan ke-0
+     * @param keteranganMenu keterangan untuk menampilan keterangan menu di
+     * suatu entitas yang dimaksud
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void pilihanKembaliAtauUbah(boolean kondisiKembali, boolean kondisiUbah, String keterangan, String keteranganMenu) throws IOException, InterruptedException {
         try {
             if (kondisiKembali) {
-                if (kondisiEdit) {
+                if (kondisiUbah) {
                     System.out.println("[1]. Ubah");
                 }
                 System.out.println("[0]. " + keterangan);
                 System.out.print("Pilih: ");
-                pilihanKembaliAtauUbah = Integer.valueOf(input.read.readLine());
+                pilihanKembaliAtauUbah = Integer.valueOf(INPUT.READ.readLine());
                 garisTepi();
                 clearConsole();
-                if (!kondisiEdit) {
+                if (!kondisiUbah) {
                     if (pilihanKembaliAtauUbah != 0) {
                         garisTepi();
                         pilihanTidakTersedia();
@@ -118,18 +198,18 @@ public class SayaTV {
                         Thread.sleep(1000);
                         clearConsole();
                         System.out.println(keteranganMenu);
-                        kondisiPilihanKembaliAtauUbah = true;
+                        kondisiPilihanKembali = true;
                     } else {
-                        kondisiPilihanKembaliAtauUbah = false;
+                        kondisiPilihanKembali = false;
                     }
                 } else {
                     switch (pilihanKembaliAtauUbah) {
                         case 1:
-                            kondisiPilihanKembaliAtauUbah = true;
-                            kondisiPilihanKembaliAtauUbah1 = true;
+                            kondisiPilihanKembali = true;
+                            kondisiPilihanUbah = true;
                             break;
                         case 0:
-                            kondisiPilihanKembaliAtauUbah = false;
+                            kondisiPilihanKembali = false;
                             break;
                         default:
                             garisTepi();
@@ -139,22 +219,35 @@ public class SayaTV {
                             Thread.sleep(1000);
                             clearConsole();
                             System.out.println(keteranganMenu);
-                            kondisiPilihanKembaliAtauUbah = true;
+                            kondisiPilihanKembali = true;
                     }
                 }
             }
         } catch (NumberFormatException nfe) {
             inputTidakValid();
             System.out.println(keteranganMenu);
-            kondisiPilihanKembaliAtauUbah = true;
+            kondisiPilihanKembali = true;
         }
     }
 
-    static void pilihanTidakTersedia() {
+    /**
+     * Menampikan pesan "Pilihan tidak tersedia"
+     */
+    public static void pilihanTidakTersedia() {
         System.out.println("Pilihan tidak tersedia");
     }
 
-    static void inputTidakValid() throws IOException, InterruptedException {
+    /**
+     * Menampilkan pesan "INPUT tidak valid" dengan dijeda selama 0,5 detik
+     * sebelum pesan tersebut menghilang
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void inputTidakValid() throws IOException, InterruptedException {
         garisTepi();
         clearConsole();
         garisTepi();
@@ -164,20 +257,38 @@ public class SayaTV {
         clearConsole();
     }
 
-    static void formulirPendaftaran() throws IOException {
+    /**
+     * menampikan den menginputkan formulir pendaftaran (nama, alamat, email, no
+     * mer HP dan hobi) secara bergantian
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     */
+    public static void formulirPendaftaran() throws IOException {
         System.out.print("Nama     : ");
-        data.nama = input.read.readLine();
+        DATA.nama = INPUT.READ.readLine();
         System.out.print("Alamat   : ");
-        data.alamat = input.read.readLine();
+        DATA.alamat = INPUT.READ.readLine();
         System.out.print("email    : ");
-        data.email = input.read.readLine();
+        DATA.email = INPUT.READ.readLine();
         System.out.print("no-HP    : ");
-        data.noHP = input.read.readLine();
+        DATA.noHP = INPUT.READ.readLine();
         System.out.print("hobi     : ");
-        data.hobi = input.read.readLine();
+        DATA.hobi = INPUT.READ.readLine();
     }
 
-    static void menuSelamatDatang() throws IOException, InterruptedException {
+    /**
+     * Menampikan menu awal yang berisikan pilihan SignIn/login, SignUp/daftar
+     * akun sebagai USER atau ADMIN, lupa password, dan keluar aplikasi. Serta
+     * instruksi - intruksi untuk memproses pilahan yang telah dipilih
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void menuSelamatDatang() throws IOException, InterruptedException {
         try {
             System.out.println("==============  Selamat Datang  ==============");
             System.out.println("[1]. SignIn");
@@ -185,7 +296,7 @@ public class SayaTV {
             System.out.println("[3]. Lupa password");
             System.out.println("[4]. Keluar Aplikasi");
             System.out.print("Pilih: ");
-            int pilihan = Integer.valueOf(input.read.readLine());
+            int pilihan = Integer.valueOf(INPUT.READ.readLine());
             garisTepi();
             clearConsole();
             switch (pilihan) {
@@ -213,18 +324,30 @@ public class SayaTV {
         }
     }
 
-    static void signUp() throws IOException, InterruptedException {
+    /**
+     * Berisi tahap - tahapan yang harus dilewati untuk membuat akun (sebagai
+     * USER/ ADMIN). Setelah selesai melewati tahap - tahapan tersebut maka DATA
+     * - DATA yang telah terinputkan akan tersinmpan secara otomatis di dalam
+     * berbagai object ArrayList yang telah di deklar sebelumnya
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void signUp() throws IOException, InterruptedException {
         boolean kondisiSignUp = true;
         do {
             System.out.println("=================  SignUp  =================");
             System.out.print("Daftar sebagai (admin/user) ");
-            String jawaban = input.read.readLine();
+            String jawaban = INPUT.READ.readLine();
             garisTepi();
             clearConsole();
             if (jawaban.equalsIgnoreCase("admin")) {
                 System.out.println("=================  SignUp  =================");
                 System.out.print("Kode admin: ");
-                String kode = input.read.readLine();
+                String kode = INPUT.READ.readLine();
                 garisTepi();
                 clearConsole();
                 if (kode.equals("A23uu!!@j")) {
@@ -235,8 +358,8 @@ public class SayaTV {
                     do {
                         System.out.println("=================  SignUp  =================");
                         System.out.print("Id baru  : ");
-                        signUp.Id = input.read.readLine();
-                        if (admin.dataId.contains(signUp.Id) || user.dataId.contains(signUp.Id)) {
+                        SIGN_UP.Id = INPUT.READ.readLine();
+                        if (ADMIN.DATA_ID.contains(SIGN_UP.Id) || USER.DATA_ID.contains(SIGN_UP.Id)) {
                             garisTepi();
                             clearConsole();
                             garisTepi();
@@ -246,21 +369,21 @@ public class SayaTV {
                             Thread.sleep(1000);
                             clearConsole();
                         }
-                    } while (admin.dataId.contains(signUp.Id) || user.dataId.contains(signUp.Id));
+                    } while (ADMIN.DATA_ID.contains(SIGN_UP.Id) || USER.DATA_ID.contains(SIGN_UP.Id));
                     System.out.print("Password baru : ");
-                    signUp.password = input.read.readLine();
+                    SIGN_UP.password = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
                     boolean kondisiSignUp1 = true;
                     do {
                         System.out.println("=================  SignUp  =================");
-                        System.out.println("Nama     : " + data.nama);
-                        System.out.println("Alamat   : " + data.alamat);
-                        System.out.println("email    : " + data.email);
-                        System.out.println("no-HP    : " + data.noHP);
-                        System.out.println("hobi     : " + data.hobi);
+                        System.out.println("Nama     : " + DATA.nama);
+                        System.out.println("Alamat   : " + DATA.alamat);
+                        System.out.println("email    : " + DATA.email);
+                        System.out.println("no-HP    : " + DATA.noHP);
+                        System.out.println("hobi     : " + DATA.hobi);
                         System.out.print("Apakah anda yakin?(Y/N) ");
-                        String pilihan = input.read.readLine();
+                        String pilihan = INPUT.READ.readLine();
                         garisTepi();
                         clearConsole();
                         if (pilihan.equalsIgnoreCase("y")) {
@@ -269,13 +392,13 @@ public class SayaTV {
                             garisTepi();
                             Thread.sleep(500);
                             clearConsole();
-                            admin.dataNama.add(data.nama);
-                            admin.dataAlamat.add(data.alamat);
-                            admin.dataEmail.add(data.email);
-                            admin.dataNoHP.add(data.noHP);
-                            admin.dataHobi.add(data.hobi);
-                            admin.dataId.add(signUp.Id);
-                            admin.dataPassword.add(signUp.password);
+                            ADMIN.DATA_NAMA.add(DATA.nama);
+                            ADMIN.DATA_ALAMAT.add(DATA.alamat);
+                            ADMIN.DATA_EMAIL.add(DATA.email);
+                            ADMIN.DATA_NO_HP.add(DATA.noHP);
+                            ADMIN.dataHobi.add(DATA.hobi);
+                            ADMIN.DATA_ID.add(SIGN_UP.Id);
+                            ADMIN.DATA_PASSWORD.add(SIGN_UP.password);
                             kondisiSignUp = false;
                             kondisiSignUp1 = false;
                         } else if (pilihan.equalsIgnoreCase("n")) {
@@ -312,8 +435,8 @@ public class SayaTV {
                 do {
                     System.out.println("=================  SignUp  =================");
                     System.out.print("Id Baru  : ");
-                    signUp.Id = input.read.readLine();
-                    if (admin.dataId.contains(signUp.Id) || user.dataId.contains(signUp.Id)) {
+                    SIGN_UP.Id = INPUT.READ.readLine();
+                    if (ADMIN.DATA_ID.contains(SIGN_UP.Id) || USER.DATA_ID.contains(SIGN_UP.Id)) {
                         garisTepi();
                         clearConsole();
                         garisTepi();
@@ -323,21 +446,21 @@ public class SayaTV {
                         Thread.sleep(1000);
                         clearConsole();
                     }
-                } while (admin.dataId.contains(signUp.Id) || user.dataId.contains(signUp.Id));
+                } while (ADMIN.DATA_ID.contains(SIGN_UP.Id) || USER.DATA_ID.contains(SIGN_UP.Id));
                 System.out.print("Password Baru : ");
-                signUp.password = input.read.readLine();
+                SIGN_UP.password = INPUT.READ.readLine();
                 garisTepi();
                 clearConsole();
                 boolean kondisiSignUp1 = true;
                 do {
                     System.out.println("=================  SignUp  =================");
-                    System.out.println("Nama     : " + data.nama);
-                    System.out.println("Alamat   : " + data.alamat);
-                    System.out.println("email    : " + data.email);
-                    System.out.println("no-HP    : " + data.noHP);
-                    System.out.println("hobi     : " + data.hobi);
+                    System.out.println("Nama     : " + DATA.nama);
+                    System.out.println("Alamat   : " + DATA.alamat);
+                    System.out.println("email    : " + DATA.email);
+                    System.out.println("no-HP    : " + DATA.noHP);
+                    System.out.println("hobi     : " + DATA.hobi);
                     System.out.print("Apakah anda yakin?(Y/N) ");
-                    String pilihan = input.read.readLine();
+                    String pilihan = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
                     if (pilihan.equalsIgnoreCase("y")) {
@@ -346,13 +469,13 @@ public class SayaTV {
                         garisTepi();
                         Thread.sleep(500);
                         clearConsole();
-                        user.dataNama.add(data.nama);
-                        user.dataAlamat.add(data.alamat);
-                        user.dataEmail.add(data.email);
-                        user.dataNoHP.add(data.noHP);
-                        user.dataHobi.add(data.hobi);
-                        user.dataId.add(signUp.Id);
-                        user.dataPassword.add(signUp.password);
+                        USER.DATA_NAMA.add(DATA.nama);
+                        USER.DATA_ALAMAT.add(DATA.alamat);
+                        USER.DATA_EMAIL.add(DATA.email);
+                        USER.DATA_NO_HP.add(DATA.noHP);
+                        USER.dataHobi.add(DATA.hobi);
+                        USER.DATA_ID.add(SIGN_UP.Id);
+                        USER.DATA_PASSWORD.add(SIGN_UP.password);
                         kondisiSignUp = false;
                         kondisiSignUp1 = false;
                     } else if (pilihan.equalsIgnoreCase("n")) {
@@ -383,31 +506,48 @@ public class SayaTV {
         } while (kondisiSignUp);
     }
 
-    static void signIn() throws IOException, InterruptedException {
+    /**
+     * Sebagai tahapan untuk dapat mengakses sistem lebih lanjut sebagai
+     * USER/ADMIN yang memiliki hak akses berbeda. Tahapan tersebut yakni
+     * memasukkan Id dan password. Jika kedua entitas tersebut dinilai cocok
+     * dimana posisi urutan suatu indeks id sama dengan indeks password maka
+     * akan berhasil jika tidak maka akan menampilkan pesan "id atau password
+     * salah". Jika pada saat berhasil masuk maka akan ada suatu variabel yang
+     * menampung indeks DATA id (USER/ADMIN) tertentu yang nantinya dibutuhkan
+     * untuk mengakses DATA DATA yang sesuai dengan indeks tersebut pada saat
+     * memasuki menu USER/ADMIN
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void signIn() throws IOException, InterruptedException {
         System.out.println("=================  SignIn  ==================");
         System.out.print("Id Anda  : ");
-        signIn.Id = input.read.readLine();
+        SIGN_IN.Id = INPUT.READ.readLine();
         System.out.print("Password : ");
-        signIn.password = input.read.readLine();
+        SIGN_IN.password = INPUT.READ.readLine();
         garisTepi();
         clearConsole();
-        if (admin.dataId.contains(signIn.Id)) {
-            int i = admin.dataId.indexOf(signIn.Id);
+        if (ADMIN.DATA_ID.contains(SIGN_IN.Id)) {
+            int i = ADMIN.DATA_ID.indexOf(SIGN_IN.Id);
             garisTepi();
-            if (signIn.password.equals(admin.dataPassword.get(i))) {
+            if (SIGN_IN.password.equals(ADMIN.DATA_PASSWORD.get(i))) {
                 System.out.println("Login berhasil");
-                admin.autentikasi = true;
-                admin.indeks = i;
+                ADMIN.autentikasi = true;
+                ADMIN.indeks = i;
             } else {
                 System.out.println("Id atau password salah");
             }
-        } else if (user.dataId.contains(signIn.Id)) {
-            int i = user.dataId.indexOf(signIn.Id);
+        } else if (USER.DATA_ID.contains(SIGN_IN.Id)) {
+            int i = USER.DATA_ID.indexOf(SIGN_IN.Id);
             garisTepi();
-            if (signIn.password.equals(user.dataPassword.get(i))) {
+            if (SIGN_IN.password.equals(USER.DATA_PASSWORD.get(i))) {
                 System.out.println("Login berhasil");
-                user.autentikasi = true;
-                user.indeks = i;
+                USER.autentikasi = true;
+                USER.indeks = i;
             } else {
                 System.out.println("Id atau password salah");
             }
@@ -420,29 +560,41 @@ public class SayaTV {
         clearConsole();
     }
 
-    static void lupaPassword() throws IOException, InterruptedException {
+    /**
+     * sebagai cara jika USER atau ADMIN lupa password. Dibutuhkan id beserta
+     * hobi. Jika id dan hobi yang diinputkan sama dengan indeks id dan indeks
+     * hobi yang sama dengan indeks id maka berhasil jika tidak akan menampilkan
+     * pesan "id atau hobi salah"
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void lupaPassword() throws IOException, InterruptedException {
         System.out.println("===============  Lupa password  ==============");
         boolean kondisiLupaPassword = true;
         System.out.print("Id Anda   : ");
-        String id = input.read.readLine();
+        String id = INPUT.READ.readLine();
         System.out.print("Hobi Anda : ");
-        String hobi = input.read.readLine();
+        String hobi = INPUT.READ.readLine();
         garisTepi();
         clearConsole();
-        if (user.dataId.contains(id)) {
-            int i = user.dataId.indexOf(id);
-            if ((hobi.equalsIgnoreCase(String.valueOf(user.dataHobi.get(i))))) {
+        if (USER.DATA_ID.contains(id)) {
+            int i = USER.DATA_ID.indexOf(id);
+            if ((hobi.equalsIgnoreCase(String.valueOf(USER.dataHobi.get(i))))) {
                 do {
                     System.out.println("===============  Lupa password  ==============");
                     System.out.print("Password baru       : ");
-                    String password = input.read.readLine();
+                    String password = INPUT.READ.readLine();
                     System.out.print("Password konfirmasi : ");
-                    String confirmPassword = input.read.readLine();
+                    String confirmPassword = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
                     garisTepi();
                     if (password.equals(confirmPassword)) {
-                        user.dataPassword.set(i, password);
+                        USER.DATA_PASSWORD.set(i, password);
                         System.out.println("Password berhasil diubah");
                         garisTepi();
                         Thread.sleep(500);
@@ -464,20 +616,20 @@ public class SayaTV {
                 Thread.sleep(500);
                 clearConsole();
             }
-        } else if (admin.dataId.contains(id)) {
-            int i = admin.dataId.indexOf(id);
-            if (hobi.equalsIgnoreCase(String.valueOf(admin.dataHobi.get(i)))) {
+        } else if (ADMIN.DATA_ID.contains(id)) {
+            int i = ADMIN.DATA_ID.indexOf(id);
+            if (hobi.equalsIgnoreCase(String.valueOf(ADMIN.dataHobi.get(i)))) {
                 do {
                     System.out.println("===============  Lupa password  ==============");
                     System.out.print("Password baru       : ");
-                    String password = input.read.readLine();
+                    String password = INPUT.READ.readLine();
                     System.out.print("Password konfirmasi : ");
-                    String confirmPassword = input.read.readLine();
+                    String confirmPassword = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
                     garisTepi();
                     if (password.equals(confirmPassword)) {
-                        admin.dataPassword.set(i, password);
+                        ADMIN.DATA_PASSWORD.set(i, password);
                         System.out.println("Password berhasil diubah");
                         garisTepi();
                         Thread.sleep(500);
@@ -508,7 +660,19 @@ public class SayaTV {
         }
     }
 
-    static void menuUser(int i) throws IOException, InterruptedException {
+    /**
+     * berisikan pilihan - pilihan yang hanya dapat diakses oleh USER dimana
+     * hanya dapat mengakses DATA - DATA dengan indeks yang sama terhadap indeks
+     * USER tertentu
+     *
+     * @param i indeks id USER yang berhasil SignIn/login
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void menuUser(int i) throws IOException, InterruptedException {
         try {
             System.out.println("===============  Menu Layanan  ===============");
             System.out.println("[1]. Daftar paket");
@@ -519,7 +683,7 @@ public class SayaTV {
             System.out.println("[6]. Info Kantor");
             System.out.println("[7]. Logout");
             System.out.print("Pilih: ");
-            int pilihan = Integer.valueOf(input.read.readLine());
+            int pilihan = Integer.valueOf(INPUT.READ.readLine());
             garisTepi();
             clearConsole();
             switch (pilihan) {
@@ -527,7 +691,7 @@ public class SayaTV {
                     daftarPaket("tersedia");
                     break;
                 case 2:
-                    beliPaket(alamatKantor, noRekeningKantor, noTelpKantor, i);
+                    beliPaket(alamatKantor, noRekeningKantor, noTelpKantor);
                     break;
                 case 3:
                     infoPaketBerlangganan(i);
@@ -547,7 +711,7 @@ public class SayaTV {
                     garisTepi();
                     Thread.sleep(500);
                     clearConsole();
-                    user.autentikasi = false;
+                    USER.autentikasi = false;
                     break;
                 default:
                     garisTepi();
@@ -561,7 +725,19 @@ public class SayaTV {
         }
     }
 
-    static void menuAdmin(int i) throws IOException, InterruptedException {
+    /**
+     * berisikan pilihan - pilihan yang hanya dapat diakses oleh ADMIN dimana
+     * hanya dapat mengakses DATA - DATA dengan indeks yang sama terhadap indeks
+     * ADMIN tertentu
+     *
+     * @param i indeks id ADMIN yang berhasil SignIn/login
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void menuAdmin(int i) throws IOException, InterruptedException {
         try {
             System.out.println("===============  Menu Layanan  ===============");
             System.out.println("[1]. Daftar & Info Pelanggan");
@@ -575,7 +751,7 @@ public class SayaTV {
             System.out.println("[9]. Cari Pelanggan dengan Paket Tertentu");
             System.out.println("[10]. Logout");
             System.out.print("Pilih: ");
-            int pilihan = Integer.valueOf(input.read.readLine());
+            int pilihan = Integer.valueOf(INPUT.READ.readLine());
             garisTepi();
             clearConsole();
             switch (pilihan) {
@@ -612,7 +788,7 @@ public class SayaTV {
                     garisTepi();
                     Thread.sleep(500);
                     clearConsole();
-                    admin.autentikasi = false;
+                    ADMIN.autentikasi = false;
                     break;
                 default:
                     garisTepi();
@@ -626,29 +802,40 @@ public class SayaTV {
         }
     }
 
-    static void cariPelangganPaket() throws IOException, InterruptedException {
+    /**
+     * Digunakan untuk mencari pelanggan dengan paket tertentu.
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void cariPelangganPaket() throws IOException, InterruptedException {
         System.out.println("======= Pelanggan dengan Paket Tertentu ======");
         System.out.print("Cari: ");
-        String cari = input.read.readLine();
+        String cari = INPUT.READ.readLine();
         garisTepi();
         clearConsole();
         System.out.println("======= Pelanggan dengan Paket Tertentu ======");
         do {
             System.out.println("Hasil:");
             int cek = 0;
-            for (int i = 0; i < dataPaket.size(); i++) {
-                if (cari.equalsIgnoreCase(String.valueOf(dataPaket.get(i)))) {
-                    for (int j = 0; j < dataPelanggan.size(); j++) {
+            for (int i = 0; i < DATA_PAKET.size(); i++) {
+                if (cari.equalsIgnoreCase(String.valueOf(DATA_PAKET.get(i)))) {
+                    for (int j = 0; j < DATA_PELANGGAN.size(); j++) {
                         int jumlahPaket = 0;
-                        for (int k = 0; k < dataValidasiPembelianPaket[j].length; k++) {
-                            if (dataValidasiPembelianPaket[j][k] != null) {
-                                if (cari.equalsIgnoreCase(dataValidasiPembelianPaket[j][k])) {
+                        for (int k = 0; k < DATA_VALIDASI_PEMBELIAN_PAKET[j].length; k++) {
+                            if (DATA_VALIDASI_PEMBELIAN_PAKET[j][k] != null) {
+                                if (cari.equalsIgnoreCase(DATA_VALIDASI_PEMBELIAN_PAKET[j][k])) {
                                     jumlahPaket++;
                                 }
+                            } else {
+                                break;
                             }
                         }
                         if (jumlahPaket > 0) {
-                            System.out.format("Pelanggan ke-%d: %s\tJumlah paket %s: %dx\n", (j + 1), dataPelanggan.get(j), dataPaket.get(i), jumlahPaket);
+                            System.out.format("Pelanggan ke-%d: %s\tJumlah paket %s: %dx\n", (j + 1), DATA_PELANGGAN.get(j), DATA_PAKET.get(i), jumlahPaket);
                             cek++;
                         }
                     }
@@ -662,48 +849,76 @@ public class SayaTV {
             } else {
                 pilihanKembaliAtauUbah(true, false, "Kembali", "======= Pelanggan dengan Paket Tertentu ======");
             }
-        } while (kondisiPilihanKembaliAtauUbah);
+        } while (kondisiPilihanKembali);
     }
 
-    static void daftarPaket(String keterangan) throws IOException, InterruptedException {
+    /**
+     * Menampikan daftar - daftar paket beserta saluran tv, harga dan masa akrif
+     * yang sebelumnya telah diinputkan oleh USER
+     *
+     * @param keterangan ketarangan yang nantinya ditampikan disamping tulisan
+     * "Paket belum "
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void daftarPaket(String keterangan) throws IOException, InterruptedException {
         System.out.println("===============  Daftar Paket  ===============");
-        if (dataPaket.isEmpty()) {
+        if (DATA_PAKET.isEmpty()) {
             System.out.println("Paket belum " + keterangan);
             garisTepi();
             Thread.sleep(500);
             clearConsole();
         } else {
             do {
-                for (int i = 0; i < dataPaket.size(); i++) {
-                    System.out.format("- Paket %s\n", String.valueOf(dataPaket.get(i)));
+                for (int i = 0; i < DATA_PAKET.size(); i++) {
+                    System.out.format("- Paket %s\n", String.valueOf(DATA_PAKET.get(i)));
                     System.out.println("     Saluran TV : ");
-                    for (int j = 0; j < dataPaketSaluranTV[i].length; j++) {
-                        if (dataPaketSaluranTV[i][j] != null) {
-                            System.out.format("         %d. %s\n", (j + 1), String.valueOf(dataPaketSaluranTV[i][j]));
+                    for (int j = 0; j < DATA_PAKET_SALURAN_TV[i].length; j++) {
+                        if (DATA_PAKET_SALURAN_TV[i][j] != null) {
+                            System.out.format("         %d. %s\n", (j + 1), String.valueOf(DATA_PAKET_SALURAN_TV[i][j]));
                         }
                     }
-                    System.out.format("     Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(i))));
+                    System.out.format("     Harga %d", Integer.valueOf(String.valueOf(DATA_HARGA.get(i))));
                     System.out.println();
-                    System.out.format("     Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(i))));
+                    System.out.format("     Masa aktif %d hari", Integer.valueOf(String.valueOf(DATA_MASA_AKTIF_PAKET.get(i))));
                     System.out.println();
                 }
                 pilihanKembaliAtauUbah(true, false, "Kembali", "===============  Daftar Paket  ===============");
-            } while (kondisiPilihanKembaliAtauUbah);
+            } while (kondisiPilihanKembali);
         }
     }
 
-    static void beliPaket(String tempat, String noRekening, String noTelp, int a) throws IOException, InterruptedException {
+    /**
+     * digunakan oleh USER jika ingin membeli paket. Menampilkan daftar paket
+     * yang berisikan nama paket, saluran TV, harga, dan masa aktif sebelum USER
+     * memilih paket. Serta terdapat fitur untuk mengurutkan daftar paket. Fitur
+     * tersebut antara lain mengurutkan dari pembelian terbanyak, termahal, dan
+     * termurah
+     *
+     * @param tempat alamat kantor SayaTV
+     * @param noRekening nomer rekening kantor SayaTV
+     * @param noTelp nomer telepon kantor SayaTV
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void beliPaket(String tempat, String noRekening, String noTelp) throws IOException, InterruptedException {
         System.out.println("================  Beli Paket  ================");
-        if (!dataPaket.isEmpty()) {
-            ArrayList tempDataPaket = new ArrayList(dataPaket);
+        if (!DATA_PAKET.isEmpty()) {
+            ArrayList tempDataPaket = new ArrayList(DATA_PAKET);
             String[][] tempDataPaketSaluranTV = new String[100][100];
-            for (int i = 0; i < dataPaketSaluranTV.length; i++) {
-                for (int j = 0; j < dataPaketSaluranTV[i].length; j++) {
-                    tempDataPaketSaluranTV[i][j] = dataPaketSaluranTV[i][j];
+            for (int i = 0; i < DATA_PAKET_SALURAN_TV.length; i++) {
+                for (int j = 0; j < DATA_PAKET_SALURAN_TV[i].length; j++) {
+                    tempDataPaketSaluranTV[i][j] = DATA_PAKET_SALURAN_TV[i][j];
                 }
             }
-            ArrayList tempDataHarga = new ArrayList(dataHarga);
-            ArrayList tempDataMasaAktifPaket = new ArrayList(dataMasaAktifPaket);
+            ArrayList tempDataHarga = new ArrayList(DATA_HARGA);
+            ArrayList tempDataMasaAktifPaket = new ArrayList(DATA_MASA_AKTIF_PAKET);
             boolean kondisiBeliPaket = true;
             boolean kondisiBeliPaket1 = true;
             do {
@@ -724,7 +939,7 @@ public class SayaTV {
                         }
                         if (tempDataHarga.size() > 1 && kondisiBeliPaket1 == true) {
                             System.out.print("Apakah ingin disortir?(Y/N) ");
-                            String jawabSortir = input.read.readLine();
+                            String jawabSortir = INPUT.READ.readLine();
                             garisTepi();
                             clearConsole();
                             if (jawabSortir.equalsIgnoreCase("y")) {
@@ -735,7 +950,7 @@ public class SayaTV {
                                         System.out.println("Berdasarkan:");
                                         System.out.println("1.Terpopuler\n2.Termahal\n3.Termurah");
                                         System.out.print("Pilih: ");
-                                        int jawabBerdasarkan = Integer.valueOf(input.read.readLine());
+                                        int jawabBerdasarkan = Integer.valueOf(INPUT.READ.readLine());
                                         garisTepi();
                                         clearConsole();
                                         String tempPaket;
@@ -842,10 +1057,10 @@ public class SayaTV {
                         }
                     } while (kondisiBeliPaket1);
                     System.out.print("Pilih paket: ");
-                    int pilihan = Integer.valueOf(input.read.readLine());
+                    int pilihan = Integer.valueOf(INPUT.READ.readLine());
                     garisTepi();
                     clearConsole();
-                    if (pilihan <= dataPaket.size() && pilihan > 0) {
+                    if (pilihan <= DATA_PAKET.size() && pilihan > 0) {
                         boolean kondisiBeliPaket2 = true;
                         do {
                             try {
@@ -854,11 +1069,11 @@ public class SayaTV {
                                 System.out.println("[1]. Bayar langsung ke kantor");
                                 System.out.println("[2]. Via ATM");
                                 System.out.print("Pilih: ");
-                                int i = Integer.valueOf(input.read.readLine());
+                                int modeBayar = Integer.valueOf(INPUT.READ.readLine());
                                 garisTepi();
                                 clearConsole();
                                 garisTepi();
-                                switch (i) {
+                                switch (modeBayar) {
                                     case 1:
                                         do {
                                             System.out.println("Pembayaran langsung dibayarkan");
@@ -866,7 +1081,7 @@ public class SayaTV {
                                             kondisiBeliPaket = false;
                                             kondisiBeliPaket2 = false;
                                             pilihanKembaliAtauUbah(true, false, "Selesai", "=========================================");
-                                        } while (kondisiPilihanKembaliAtauUbah);
+                                        } while (kondisiPilihanKembali);
                                         break;
                                     case 2:
                                         do {
@@ -877,7 +1092,7 @@ public class SayaTV {
                                             kondisiBeliPaket = false;
                                             kondisiBeliPaket2 = false;
                                             pilihanKembaliAtauUbah(true, false, "Selesai", "=========================================");
-                                        } while (kondisiPilihanKembaliAtauUbah);
+                                        } while (kondisiPilihanKembali);
                                         break;
                                     default:
                                         pilihanTidakTersedia();
@@ -912,30 +1127,40 @@ public class SayaTV {
         }
     }
 
-    static void infoPaketBerlangganan(int i) throws IOException, InterruptedException {
+    /**
+     * menampilkan paket - paket yang telah divalidai oleh ADMIN
+     *
+     * @param i indeks USER
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void infoPaketBerlangganan(int i) throws IOException, InterruptedException {
         System.out.println("===========  Info Berlangganan  ==============");
         int n = 1;
-        if (dataPelanggan.contains(user.dataId.get(i))) {
-            int j = dataPelanggan.indexOf(user.dataId.get(i));
-            if (dataValidasiPembelianPaket[j][0] != null) {
+        if (DATA_PELANGGAN.contains(USER.DATA_ID.get(i))) {
+            int j = DATA_PELANGGAN.indexOf(USER.DATA_ID.get(i));
+            if (DATA_VALIDASI_PEMBELIAN_PAKET[j][0] != null) {
                 do {
-                    for (int k = 0; k < dataValidasiPembelianPaket[j].length; k++) {
-                        if (dataPaket.contains(dataValidasiPembelianPaket[j][k])) {
-                            int l = dataPaket.indexOf(dataValidasiPembelianPaket[j][k]);
-                            System.out.format("- Paket %s\n", String.valueOf(dataPaket.get(l)));
+                    for (int k = 0; k < DATA_VALIDASI_PEMBELIAN_PAKET[j].length; k++) {
+                        if (DATA_PAKET.contains(DATA_VALIDASI_PEMBELIAN_PAKET[j][k])) {
+                            int l = DATA_PAKET.indexOf(DATA_VALIDASI_PEMBELIAN_PAKET[j][k]);
+                            System.out.format("- Paket %s\n", String.valueOf(DATA_PAKET.get(l)));
                             System.out.println("     Saluran TV : ");
-                            for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
-                                if (dataPaketSaluranTV[l][m] != null) {
-                                    System.out.format("         %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
+                            for (int m = 0; m < DATA_PAKET_SALURAN_TV[l].length; m++) {
+                                if (DATA_PAKET_SALURAN_TV[l][m] != null) {
+                                    System.out.format("         %d. %s\n", (m + 1), String.valueOf(DATA_PAKET_SALURAN_TV[l][m]));
                                 }
                             }
-                            System.out.format("     Harga %d\n", Integer.valueOf(String.valueOf(dataHarga.get(l))));
-                            System.out.format("     Masa aktif %d hari\n", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
+                            System.out.format("     Harga %d\n", Integer.valueOf(String.valueOf(DATA_HARGA.get(l))));
+                            System.out.format("     Masa aktif %d hari\n", Integer.valueOf(String.valueOf(DATA_MASA_AKTIF_PAKET.get(l))));
                             n++;
                         }
                     }
                     pilihanKembaliAtauUbah(true, false, "Kembali", "===========  Info Berlangganan  ==============");
-                } while (kondisiPilihanKembaliAtauUbah);
+                } while (kondisiPilihanKembali);
             } else {
                 System.out.println("Anda belum membeli paket atau ");
                 System.out.println("pembayaran belum divalidasi");
@@ -953,37 +1178,47 @@ public class SayaTV {
         }
     }
 
-    static void berhentiPaket(int i) throws IOException, InterruptedException {
+    /**
+     * memberhentikan suatu paket
+     *
+     * @param i indeks USER
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void berhentiPaket(int i) throws IOException, InterruptedException {
         System.out.println("===========  Berhenti Berlangganan  ==========");
         int n = 1;
-        if (dataPelanggan.contains(user.dataId.get(i))) {
-            int l = dataPelanggan.indexOf(user.dataId.get(i));
-            if (dataValidasiPembelianPaket[l][0] != null) {
+        if (DATA_PELANGGAN.contains(USER.DATA_ID.get(i))) {
+            int l = DATA_PELANGGAN.indexOf(USER.DATA_ID.get(i));
+            if (DATA_VALIDASI_PEMBELIAN_PAKET[l][0] != null) {
                 boolean kondisiBerhentiPaket = true;
                 do {
                     try {
-                        for (int j = 0; j < dataValidasiPembelianPaket[l].length; j++) {
-                            if (dataPaket.contains(dataValidasiPembelianPaket[l][j])) {
-                                int k = dataPaket.indexOf(dataValidasiPembelianPaket[l][j]);
-                                System.out.format("[%d]. Paket %s\n", n, String.valueOf(dataPaket.get(k)));
+                        for (int j = 0; j < DATA_VALIDASI_PEMBELIAN_PAKET[l].length; j++) {
+                            if (DATA_PAKET.contains(DATA_VALIDASI_PEMBELIAN_PAKET[l][j])) {
+                                int k = DATA_PAKET.indexOf(DATA_VALIDASI_PEMBELIAN_PAKET[l][j]);
+                                System.out.format("[%d]. Paket %s\n", n, String.valueOf(DATA_PAKET.get(k)));
                                 System.out.println("     Saluran TV : ");
-                                for (int m = 0; m < dataPaketSaluranTV[k].length; m++) {
-                                    if (dataPaketSaluranTV[k][m] != null) {
-                                        System.out.format("         %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[k][m]));
+                                for (int m = 0; m < DATA_PAKET_SALURAN_TV[k].length; m++) {
+                                    if (DATA_PAKET_SALURAN_TV[k][m] != null) {
+                                        System.out.format("         %d. %s\n", (m + 1), String.valueOf(DATA_PAKET_SALURAN_TV[k][m]));
                                     }
                                 }
-                                System.out.format("     Harga %d\n", Integer.valueOf(String.valueOf(dataHarga.get(k))));
-                                System.out.format("     Masa aktif %d hari\n", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(k))));
+                                System.out.format("     Harga %d\n", Integer.valueOf(String.valueOf(DATA_HARGA.get(k))));
+                                System.out.format("     Masa aktif %d hari\n", Integer.valueOf(String.valueOf(DATA_MASA_AKTIF_PAKET.get(k))));
                                 n++;
                             }
                         }
                         System.out.print("Pilih: ");
-                        int pilihan = Integer.valueOf(input.read.readLine());
+                        int pilihan = Integer.valueOf(INPUT.READ.readLine());
                         garisTepi();
                         clearConsole();
                         int k = 0;
-                        for (int j = 0; j < dataValidasiPembelianPaket[i].length; j++) {
-                            if (dataValidasiPembelianPaket[i][j] != null) {
+                        for (int j = 0; j < DATA_VALIDASI_PEMBELIAN_PAKET[i].length; j++) {
+                            if (DATA_VALIDASI_PEMBELIAN_PAKET[i][j] != null) {
                                 k++;
                             }
                         }
@@ -992,13 +1227,13 @@ public class SayaTV {
                             do {
                                 garisTepi();
                                 System.out.print("Apakah anda yakin?(Y/N) ");
-                                String jawab = input.read.readLine();
+                                String jawab = INPUT.READ.readLine();
                                 garisTepi();
                                 clearConsole();
                                 if (jawab.equalsIgnoreCase("y")) {
-                                    dataValidasiPembelianPaket[i][pilihan - 1] = null;
-                                    for (int j = pilihan - 1; j < dataValidasiPembelianPaket[i].length - 1; j++) {
-                                        dataValidasiPembelianPaket[i][j] = dataValidasiPembelianPaket[i][j + 1];
+                                    DATA_VALIDASI_PEMBELIAN_PAKET[i][pilihan - 1] = null;
+                                    for (int j = pilihan - 1; j < DATA_VALIDASI_PEMBELIAN_PAKET[i].length - 1; j++) {
+                                        DATA_VALIDASI_PEMBELIAN_PAKET[i][j] = DATA_VALIDASI_PEMBELIAN_PAKET[i][j + 1];
                                     }
                                     garisTepi();
                                     System.out.format("Paket ke-%d berhasil diberhentikan\n", pilihan);
@@ -1054,38 +1289,48 @@ public class SayaTV {
         }
     }
 
-    static void daftarInfoPelanggan() throws IOException, InterruptedException {
+    /**
+     * Menampilkan semua pelanggan besertakan DATA diri pelanggan berupa nama,
+     * alamat, nomer hp dan email dan paket paket yang telah divalidasi ADMIN
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void daftarInfoPelanggan() throws IOException, InterruptedException {
         System.out.println("==========  Daftar & Info Pelanggan  =========");
-        if (dataPelanggan.isEmpty()) {
+        if (DATA_PELANGGAN.isEmpty()) {
             System.out.println("Belum ada pelanggan");
             garisTepi();
             Thread.sleep(500);
             clearConsole();
         } else {
             do {
-                for (int i = 0; i < dataPelanggan.size(); i++) {
-                    int j = user.dataId.indexOf(dataPelanggan.get(i));
+                for (int i = 0; i < DATA_PELANGGAN.size(); i++) {
+                    int j = USER.DATA_ID.indexOf(DATA_PELANGGAN.get(i));
                     System.out.println(" - Pelanggan ke-" + (i + 1));
-                    System.out.format("    Nama   : %s\n", user.dataNama.get(j));
-                    System.out.format("    Alamat : %s\n", user.dataAlamat.get(j));
-                    System.out.format("    No. HP : %s\n", user.dataNoHP.get(j));
-                    System.out.format("    Email  : %s\n", user.dataEmail.get(j));
+                    System.out.format("    Nama   : %s\n", USER.DATA_NAMA.get(j));
+                    System.out.format("    Alamat : %s\n", USER.DATA_ALAMAT.get(j));
+                    System.out.format("    No. HP : %s\n", USER.DATA_NO_HP.get(j));
+                    System.out.format("    Email  : %s\n", USER.DATA_EMAIL.get(j));
                     System.out.println("    Paket yang aktif: ");
-                    if (dataValidasiPembelianPaket[i][0] != null) {
+                    if (DATA_VALIDASI_PEMBELIAN_PAKET[i][0] != null) {
                         int n = 1;
-                        for (int k = 0; k < dataValidasiPembelianPaket[i].length; k++) {
-                            if (dataPaket.contains(dataValidasiPembelianPaket[i][k])) {
-                                int l = dataPaket.indexOf(dataValidasiPembelianPaket[i][k]);
-                                System.out.format("     %d. Paket %s\n", n, String.valueOf(dataPaket.get(l)));
+                        for (int k = 0; k < DATA_VALIDASI_PEMBELIAN_PAKET[i].length; k++) {
+                            if (DATA_PAKET.contains(DATA_VALIDASI_PEMBELIAN_PAKET[i][k])) {
+                                int l = DATA_PAKET.indexOf(DATA_VALIDASI_PEMBELIAN_PAKET[i][k]);
+                                System.out.format("     %d. Paket %s\n", n, String.valueOf(DATA_PAKET.get(l)));
                                 System.out.println("          Saluran TV : ");
-                                for (int m = 0; m < dataPaketSaluranTV[l].length; m++) {
-                                    if (dataPaketSaluranTV[l][m] != null) {
-                                        System.out.format("              %d. %s\n", (m + 1), String.valueOf(dataPaketSaluranTV[l][m]));
+                                for (int m = 0; m < DATA_PAKET_SALURAN_TV[l].length; m++) {
+                                    if (DATA_PAKET_SALURAN_TV[l][m] != null) {
+                                        System.out.format("              %d. %s\n", (m + 1), String.valueOf(DATA_PAKET_SALURAN_TV[l][m]));
                                     }
                                 }
-                                System.out.format("          Harga %d", Integer.valueOf(String.valueOf(dataHarga.get(l))));
+                                System.out.format("          Harga %d", Integer.valueOf(String.valueOf(DATA_HARGA.get(l))));
                                 System.out.println();
-                                System.out.format("          Masa aktif %d hari", Integer.valueOf(String.valueOf(dataMasaAktifPaket.get(l))));
+                                System.out.format("          Masa aktif %d hari", Integer.valueOf(String.valueOf(DATA_MASA_AKTIF_PAKET.get(l))));
                                 System.out.println();
                                 n++;
                             }
@@ -1095,76 +1340,94 @@ public class SayaTV {
                     }
                 }
                 pilihanKembaliAtauUbah(true, false, "Kembali", "==========  Daftar & Info Pelanggan  =========");
-            } while (kondisiPilihanKembaliAtauUbah);
+            } while (kondisiPilihanKembali);
         }
     }
 
-    static void daftarSaluranTV() throws IOException, InterruptedException {
+    /**
+     * Menampilkan daftas saluran tv
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void daftarSaluranTV() throws IOException, InterruptedException {
         System.out.println("============  Daftar Saluran TV  =============");
-        if (dataSaluranTV.isEmpty()) {
+        if (DATA_SALURAN_TV.isEmpty()) {
             System.out.println("Saluran TV belum ditambahkan");
             garisTepi();
             Thread.sleep(500);
             clearConsole();
         } else {
             do {
-                for (int i = 0; i < dataSaluranTV.size(); i++) {
-                    System.out.format("- %s ", String.valueOf(dataSaluranTV.get(i)));
+                for (int i = 0; i < DATA_SALURAN_TV.size(); i++) {
+                    System.out.format("- %s ", String.valueOf(DATA_SALURAN_TV.get(i)));
                     System.out.println();
                 }
                 pilihanKembaliAtauUbah(true, false, "Kembali", "============  Daftar Saluran TV  =============");
-            } while (kondisiPilihanKembaliAtauUbah);
+            } while (kondisiPilihanKembali);
         }
     }
 
-    static void tambahPaket() throws IOException, InterruptedException {
-        boolean kondisiAddPaket = false;
+    /**
+     * Menambahkan paket dengan cara memberikan nama paket, memilih berbagai
+     * salurah tv, menentukan harga dan masa aktif paket
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void tambahPaket() throws IOException, InterruptedException {
+        boolean kondisiAddPaket = true;
         do {
             System.out.println("==============  Tambahkan Paket  =============");
             int j = 0;
-            if (dataSaluranTV.isEmpty()) {
+            if (DATA_SALURAN_TV.isEmpty()) {
                 System.out.println("Saluran TV belum ditambahkan");
                 garisTepi();
                 Thread.sleep(500);
                 clearConsole();
             } else {
                 System.out.print("Nama paket: ");
-                data.paket = input.read.readLine();
-                data.paket = data.paket.toUpperCase();
+                DATA.paket = INPUT.READ.readLine();
+                DATA.paket = DATA.paket.toUpperCase();
                 garisTepi();
                 clearConsole();
-                if (dataPaket.contains(data.paket)) {
+                if (DATA_PAKET.contains(DATA.paket)) {
                     garisTepi();
                     System.out.println("Nama paket sudah digunakan");
                     System.out.println("Ulangi Lagi");
                     garisTepi();
                     Thread.sleep(1000);
                     clearConsole();
-                    kondisiAddPaket = true;
                 } else {
-                    dataPaket.add(data.paket);
-                    ArrayList tempDataSaluranTV = new ArrayList(dataSaluranTV);
+                    DATA_PAKET.add(DATA.paket);
+                    ArrayList tempDataSaluranTV = new ArrayList(DATA_SALURAN_TV);
                     kondisiAddPaket = false;
                     boolean kondisiAddPaket1 = true;
                     do {
                         try {
                             System.out.println("==============  Tambahkan Paket  =============");
-                            System.out.println("Nama Paket: " + data.paket);
+                            System.out.println("Nama Paket: " + DATA.paket);
                             System.out.println("Saluran TV:");
                             for (int i = 0; i < tempDataSaluranTV.size(); i++) {
                                 System.out.format("[%d]. %s\n", (i + 1), tempDataSaluranTV.get(i));
                             }
                             System.out.print("Pilih saluran TV: ");
-                            int i = Integer.valueOf(input.read.readLine());
+                            int pilihSaluranTV = Integer.valueOf(INPUT.READ.readLine());
                             garisTepi();
                             clearConsole();
-                            if (i <= tempDataSaluranTV.size() && i > 0) {
-                                data.paketSaluranTV = String.valueOf(tempDataSaluranTV.get(i - 1));
-                                dataPaketSaluranTV[dataPaket.size() - 1][j] = data.paketSaluranTV;
+                            if (pilihSaluranTV <= tempDataSaluranTV.size() && pilihSaluranTV > 0) {
+                                DATA.paketSaluranTV = String.valueOf(tempDataSaluranTV.get(pilihSaluranTV - 1));
+                                DATA_PAKET_SALURAN_TV[DATA_PAKET.size() - 1][j] = DATA.paketSaluranTV;
                                 j++;
                                 garisTepi();
-                                System.out.format("Saluran TV %s berhasil dimasukkan\n", tempDataSaluranTV.get(i - 1));
-                                tempDataSaluranTV.remove(i - 1);
+                                System.out.format("Saluran TV %s berhasil dimasukkan\n", tempDataSaluranTV.get(pilihSaluranTV - 1));
+                                tempDataSaluranTV.remove(pilihSaluranTV - 1);
                                 garisTepi();
                                 Thread.sleep(1000);
                                 clearConsole();
@@ -1175,13 +1438,13 @@ public class SayaTV {
                                     do {
                                         garisTepi();
                                         System.out.print("Pilih lagi?(Y/N) ");
-                                        String pilihan = input.read.readLine();
+                                        String pilihLagi = INPUT.READ.readLine();
                                         garisTepi();
                                         clearConsole();
-                                        if (pilihan.equalsIgnoreCase("n")) {
+                                        if (pilihLagi.equalsIgnoreCase("n")) {
                                             kondisiAddPaket1 = false;
                                             kondisiAddPaket2 = false;
-                                        } else if (pilihan.equalsIgnoreCase("y")) {
+                                        } else if (pilihLagi.equalsIgnoreCase("y")) {
                                             kondisiAddPaket2 = false;
                                         } else {
                                             garisTepi();
@@ -1205,58 +1468,77 @@ public class SayaTV {
                             inputTidakValid();
                         }
                     } while (kondisiAddPaket1);
-                    System.out.println("==============  Tambahkan Paket  =============");
-                    int k = dataPaket.size();
-                    System.out.println("Nama Paket: " + dataPaket.get(k - 1));
-                    System.out.println("Saluran TV:");
-                    for (int i = 0; i < 10; i++) {
-                        if (dataPaketSaluranTV[k - 1][i] != null) {
-                            System.out.format("[%d]. %s\n", (i + 1), dataPaketSaluranTV[k - 1][i]);
+                    boolean kondisiAddPaket2 = true;
+                    do {
+                        try {
+                            System.out.println("==============  Tambahkan Paket  =============");
+                            int k = DATA_PAKET.size();
+                            System.out.println("Nama Paket: " + DATA_PAKET.get(k - 1));
+                            System.out.println("Saluran TV:");
+                            for (int i = 0; i < 10; i++) {
+                                if (DATA_PAKET_SALURAN_TV[k - 1][i] != null) {
+                                    System.out.format("[%d]. %s\n", (i + 1), DATA_PAKET_SALURAN_TV[k - 1][i]);
+                                }
+                            }
+                            System.out.print("Harga paket: ");
+                            int harga = Integer.valueOf(INPUT.READ.readLine());
+                            System.out.print("Masa aktif paket(hari): ");
+                            int hari = Integer.valueOf(INPUT.READ.readLine());
+                            DATA_MASA_AKTIF_PAKET.add(hari);
+                            DATA_HARGA.add(harga);
+                            garisTepi();
+                            clearConsole();
+                            garisTepi();
+                            System.out.format("Paket ke-%d telah tersimpan\n", DATA_PAKET.size());
+                            garisTepi();
+                            Thread.sleep(1000);
+                            clearConsole();
+                            kondisiAddPaket2 = false;
+                        } catch (NumberFormatException nfe) {
+                            inputTidakValid();
                         }
-                    }
-                    System.out.print("Harga paket: ");
-                    data.harga = input.read.readLine();
-                    dataHarga.add(data.harga);
-                    System.out.print("Masa aktif paket(hari): ");
-                    String hari = input.read.readLine();
-                    dataMasaAktifPaket.add(hari);
-                    garisTepi();
-                    clearConsole();
-                    garisTepi();
-                    System.out.format("Paket ke-%d telah tersimpan\n", dataPaket.size());
-                    garisTepi();
-                    Thread.sleep(1000);
-                    clearConsole();
+                    } while (kondisiAddPaket2);
                 }
             }
         } while (kondisiAddPaket);
     }
 
-    static void tambahSaluranTV() throws IOException, InterruptedException {
+    /**
+     * Menambahkan saluran TV. Setiap inputan saluran TV akan secara otomatis
+     * menjadi huruf kapital semua. Saluran TV yang sudah diinputkan tidak bisa
+     * lagi diinputkan
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void tambahSaluranTV() throws IOException, InterruptedException {
         boolean kondisiAddSaluranTV = true;
         do {
             System.out.println("============  Tambah Saluran TV  =============");
-            if (!dataSaluranTV.isEmpty()) {
+            if (!DATA_SALURAN_TV.isEmpty()) {
                 System.out.println("Daftar Saluran TV Lama:");
-                for (int i = 0; i < dataSaluranTV.size(); i++) {
-                    System.out.format("- %s\n", dataSaluranTV.get(i));
+                for (int i = 0; i < DATA_SALURAN_TV.size(); i++) {
+                    System.out.format("- %s\n", DATA_SALURAN_TV.get(i));
                 }
             }
             System.out.print("Saluran TV baru: ");
-            data.saluranTV = input.read.readLine();
+            DATA.saluranTV = INPUT.READ.readLine();
             garisTepi();
             clearConsole();
             garisTepi();
-            data.saluranTV = data.saluranTV.toUpperCase();
-            if (dataSaluranTV.contains(data.saluranTV)) {
+            DATA.saluranTV = DATA.saluranTV.toUpperCase();
+            if (DATA_SALURAN_TV.contains(DATA.saluranTV)) {
                 System.out.println("Saluran TV sudah ditambahkan");
                 System.out.println("Ulangi lagi");
                 garisTepi();
                 Thread.sleep(1000);
                 clearConsole();
             } else {
-                dataSaluranTV.add(data.saluranTV);
-                System.out.format("Saluran TV ke-%d telah tersimpan\n", dataSaluranTV.size());
+                DATA_SALURAN_TV.add(DATA.saluranTV);
+                System.out.format("Saluran TV ke-%d telah tersimpan\n", DATA_SALURAN_TV.size());
                 garisTepi();
                 Thread.sleep(1000);
                 clearConsole();
@@ -1264,12 +1546,12 @@ public class SayaTV {
                 do {
                     garisTepi();
                     System.out.print("Tambahkan lagi?(Y/N) ");
-                    String pilihan = input.read.readLine();
+                    String tambahLagi = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
-                    if (pilihan.equalsIgnoreCase("y")) {
+                    if (tambahLagi.equalsIgnoreCase("y")) {
                         kondisiAddSaluranTV1 = false;
-                    } else if (pilihan.equalsIgnoreCase("n")) {
+                    } else if (tambahLagi.equalsIgnoreCase("n")) {
                         kondisiAddSaluranTV = false;
                         kondisiAddSaluranTV1 = false;
                     } else {
@@ -1285,27 +1567,38 @@ public class SayaTV {
         } while (kondisiAddSaluranTV);
     }
 
-    static void infoAkunUser(int i) throws IOException, InterruptedException {
+    /**
+     * Menampilkan info USER berupa nama, alamaat, hobi, nomer HP dan email.
+     * Terdapat juga fitur untuk merubah isi dari info tersebut
+     *
+     * @param i indeks USER
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void infoAkunUser(int i) throws IOException, InterruptedException {
         System.out.println("=================  Info Akun  ================");
         do {
-            System.out.format("-Nama   : %s\n", user.dataNama.get(i));
-            System.out.format("-Alamat : %s\n", user.dataAlamat.get(i));
-            System.out.format("-Hobi   : %s\n", user.dataHobi.get(i));
-            System.out.format("-No. HP : %s\n", user.dataNoHP.get(i));
-            System.out.format("-Email  : %s\n", user.dataEmail.get(i));
+            System.out.format("-Nama   : %s\n", USER.DATA_NAMA.get(i));
+            System.out.format("-Alamat : %s\n", USER.DATA_ALAMAT.get(i));
+            System.out.format("-Hobi   : %s\n", USER.dataHobi.get(i));
+            System.out.format("-No. HP : %s\n", USER.DATA_NO_HP.get(i));
+            System.out.format("-Email  : %s\n", USER.DATA_EMAIL.get(i));
             pilihanKembaliAtauUbah(true, true, "Kembali", "=================  Info Akun  ================");
-            while (kondisiPilihanKembaliAtauUbah1) {
+            while (kondisiPilihanUbah) {
                 System.out.println("=================  Info Akun  ================");
                 System.out.print("Nama baru  : ");
-                String nama = input.read.readLine();
+                String nama = INPUT.READ.readLine();
                 System.out.print("Alamat baru: ");
-                String alamat = input.read.readLine();
+                String alamat = INPUT.READ.readLine();
                 System.out.print("Hobi baru  : ");
-                String hobi = input.read.readLine();
+                String hobi = INPUT.READ.readLine();
                 System.out.print("No. HP baru: ");
-                String noHP = input.read.readLine();
+                String noHP = INPUT.READ.readLine();
                 System.out.print("Email baru : ");
-                String email = input.read.readLine();
+                String email = INPUT.READ.readLine();
                 garisTepi();
                 clearConsole();
                 boolean kondisiInfoAkunUser = true;
@@ -1317,15 +1610,15 @@ public class SayaTV {
                     System.out.format("No. HP baru: %s\n", noHP);
                     System.out.format("Email baru : %s\n", email);
                     System.out.print("Apakah anda yakin?(Y/N) ");
-                    String jawab = input.read.readLine();
+                    String apaYakin = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
-                    if (jawab.equalsIgnoreCase("y")) {
-                        user.dataNama.set(i, nama);
-                        user.dataAlamat.set(i, alamat);
-                        user.dataHobi.set(i, hobi);
-                        user.dataNoHP.set(i, noHP);
-                        user.dataEmail.set(i, email);
+                    if (apaYakin.equalsIgnoreCase("y")) {
+                        USER.DATA_NAMA.set(i, nama);
+                        USER.DATA_ALAMAT.set(i, alamat);
+                        USER.dataHobi.set(i, hobi);
+                        USER.DATA_NO_HP.set(i, noHP);
+                        USER.DATA_EMAIL.set(i, email);
                         garisTepi();
                         System.out.println("Perubahan berhasil");
                         garisTepi();
@@ -1333,8 +1626,8 @@ public class SayaTV {
                         clearConsole();
                         System.out.println("=================  Info Akun  ================");
                         kondisiInfoAkunUser = false;
-                        kondisiPilihanKembaliAtauUbah1 = false;
-                    } else if (jawab.equalsIgnoreCase("n")) {
+                        kondisiPilihanUbah = false;
+                    } else if (apaYakin.equalsIgnoreCase("n")) {
                         garisTepi();
                         System.out.println("Perubahan dibatalkan");
                         garisTepi();
@@ -1342,7 +1635,7 @@ public class SayaTV {
                         clearConsole();
                         System.out.println("=================  Info Akun  ================");
                         kondisiInfoAkunUser = false;
-                        kondisiPilihanKembaliAtauUbah1 = false;
+                        kondisiPilihanUbah = false;
                     } else {
                         garisTepi();
                         pilihanTidakTersedia();
@@ -1353,30 +1646,41 @@ public class SayaTV {
                     }
                 } while (kondisiInfoAkunUser);
             }
-        } while (kondisiPilihanKembaliAtauUbah);
+        } while (kondisiPilihanKembali);
     }
 
-    static void infoAkunAdmin(int i) throws IOException, InterruptedException {
+    /**
+     * Menampilkan info ADMIN berupa nama, alamaat, hobi, nomer HP dan email.
+     * Terdapat juga fitur untuk merubah isi dari info tersebut
+     *
+     * @param i indeks ADMIN
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void infoAkunAdmin(int i) throws IOException, InterruptedException {
         System.out.println("=================  Info Akun  ================");
         do {
-            System.out.format("-Nama\t: %s\n", admin.dataNama.get(i));
-            System.out.format("-Alamat\t: %s\n", admin.dataAlamat.get(i));
-            System.out.format("-Hobi\t: %s\n", admin.dataHobi.get(i));
-            System.out.format("-No. HP\t: %s\n", admin.dataNoHP.get(i));
-            System.out.format("-Email\t: %s\n", admin.dataEmail.get(i));
+            System.out.format("-Nama\t: %s\n", ADMIN.DATA_NAMA.get(i));
+            System.out.format("-Alamat\t: %s\n", ADMIN.DATA_ALAMAT.get(i));
+            System.out.format("-Hobi\t: %s\n", ADMIN.dataHobi.get(i));
+            System.out.format("-No. HP\t: %s\n", ADMIN.DATA_NO_HP.get(i));
+            System.out.format("-Email\t: %s\n", ADMIN.DATA_EMAIL.get(i));
             pilihanKembaliAtauUbah(true, true, "Kembali", "=================  Info Akun  ================");
-            while (kondisiPilihanKembaliAtauUbah1) {
+            while (kondisiPilihanUbah) {
                 System.out.println("=================  Info Akun  ================");
                 System.out.print("Nama baru  : ");
-                String nama = input.read.readLine();
+                String nama = INPUT.READ.readLine();
                 System.out.print("Alamat baru: ");
-                String alamat = input.read.readLine();
+                String alamat = INPUT.READ.readLine();
                 System.out.print("Hobi baru  : ");
-                String hobi = input.read.readLine();
+                String hobi = INPUT.READ.readLine();
                 System.out.print("No. HP baru: ");
-                String noHP = input.read.readLine();
+                String noHP = INPUT.READ.readLine();
                 System.out.print("Email baru : ");
-                String email = input.read.readLine();
+                String email = INPUT.READ.readLine();
                 garisTepi();
                 clearConsole();
                 boolean kondisiInfoAkunAdmin = true;
@@ -1388,15 +1692,15 @@ public class SayaTV {
                     System.out.format("No. HP baru: %s\n", noHP);
                     System.out.format("Email baru : %s\n", email);
                     System.out.print("Apakah anda yakin?(Y/N) ");
-                    String jawab = input.read.readLine();
+                    String apaYakin = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
-                    if (jawab.equalsIgnoreCase("y")) {
-                        admin.dataNama.set(i, nama);
-                        admin.dataAlamat.set(i, alamat);
-                        admin.dataHobi.set(i, hobi);
-                        admin.dataNoHP.set(i, noHP);
-                        admin.dataEmail.set(i, email);
+                    if (apaYakin.equalsIgnoreCase("y")) {
+                        ADMIN.DATA_NAMA.set(i, nama);
+                        ADMIN.DATA_ALAMAT.set(i, alamat);
+                        ADMIN.dataHobi.set(i, hobi);
+                        ADMIN.DATA_NO_HP.set(i, noHP);
+                        ADMIN.DATA_EMAIL.set(i, email);
                         garisTepi();
                         System.out.println("Perubahan berhasil");
                         garisTepi();
@@ -1404,8 +1708,8 @@ public class SayaTV {
                         clearConsole();
                         System.out.println("=================  Info Akun  ================");
                         kondisiInfoAkunAdmin = false;
-                        kondisiPilihanKembaliAtauUbah1 = false;
-                    } else if (jawab.equalsIgnoreCase("n")) {
+                        kondisiPilihanUbah = false;
+                    } else if (apaYakin.equalsIgnoreCase("n")) {
                         garisTepi();
                         System.out.println("Perubahan dibatalkan");
                         garisTepi();
@@ -1413,7 +1717,7 @@ public class SayaTV {
                         clearConsole();
                         System.out.println("=================  Info Akun  ================");
                         kondisiInfoAkunAdmin = false;
-                        kondisiPilihanKembaliAtauUbah1 = false;
+                        kondisiPilihanUbah = false;
                     } else {
                         garisTepi();
                         pilihanTidakTersedia();
@@ -1424,12 +1728,26 @@ public class SayaTV {
                     }
                 } while (kondisiInfoAkunAdmin);
             }
-        } while (kondisiPilihanKembaliAtauUbah);
+        } while (kondisiPilihanKembali);
     }
 
-    static void validasiPembayaran() throws IOException, InterruptedException {
+    /**
+     * Validasi pembelian paket USER oleh ADMIN yang telah melakukan pembayaran.
+     * Posisi USER tersebut yang telah divalidasi akan dimasukkan ke DATA
+     * pelanggan. Cara validasi yakni ADMIN akan memilih salah satu USER dari
+     * daftar semua id USER . Setelah itu ADMIN akan memilih paket dari daftas
+     * semua nama paket. Selesai dari itu paket yang dibeli oleh USER
+     * tervalidasi dan posisi USER langsung menjadi pelanggan.
+     *
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void validasiPembayaran() throws IOException, InterruptedException {
         System.out.println("===========  Validasi Pembayaran  ============");
-        if (user.dataId.isEmpty()) {
+        if (USER.DATA_ID.isEmpty()) {
             System.out.println("Belum ada Id User");
             System.out.println("Validasi dibatalkan");
             garisTepi();
@@ -1440,17 +1758,17 @@ public class SayaTV {
             do {
                 try {
                     System.out.println("Daftar Id User:");
-                    for (int i = 0; i < user.dataId.size(); i++) {
-                        System.out.format("[%d]. %s\n", (i + 1), user.dataId.get(i));
+                    for (int i = 0; i < USER.DATA_ID.size(); i++) {
+                        System.out.format("[%d]. %s\n", (i + 1), USER.DATA_ID.get(i));
                     }
                     System.out.print("Pilih: ");
-                    int pilihUser = Integer.valueOf(input.read.readLine());
+                    int pilihUser = Integer.valueOf(INPUT.READ.readLine());
                     garisTepi();
                     clearConsole();
-                    if (pilihUser <= user.dataId.size() && pilihUser > 0) {
+                    if (pilihUser <= USER.DATA_ID.size() && pilihUser > 0) {
                         kondisiValidasiPembayaran = false;
                         System.out.println("===========  Validasi Pembayaran  ============");
-                        if (dataPaket.isEmpty()) {
+                        if (DATA_PAKET.isEmpty()) {
                             System.out.println("Belum ada paket");
                             System.out.println("Validasi dibatalkan");
                             garisTepi();
@@ -1461,39 +1779,39 @@ public class SayaTV {
                             do {
                                 try {
                                     System.out.println("Daftar Paket:");
-                                    for (int i = 0; i < dataPaket.size(); i++) {
-                                        System.out.format("[%d]. %s\n", (i + 1), dataPaket.get(i));
+                                    for (int i = 0; i < DATA_PAKET.size(); i++) {
+                                        System.out.format("[%d]. %s\n", (i + 1), DATA_PAKET.get(i));
                                     }
                                     System.out.print("Pilih: ");
-                                    int pilihPaket = Integer.valueOf(input.read.readLine());
+                                    int pilihPaket = Integer.valueOf(INPUT.READ.readLine());
                                     garisTepi();
                                     clearConsole();
-                                    if (pilihPaket <= dataPaket.size() && pilihPaket > 0) {
+                                    if (pilihPaket <= DATA_PAKET.size() && pilihPaket > 0) {
                                         kondisiValidasiPembayaran1 = false;
                                         boolean kondisiValidasiPembayaran2 = true;
                                         do {
                                             System.out.println("===========  Validasi Pembayaran  ============");
-                                            System.out.println("Id User          : " + user.dataId.get(pilihUser - 1));
-                                            System.out.println("Paket yang dibeli: " + dataPaket.get(pilihPaket - 1));
+                                            System.out.println("Id User          : " + USER.DATA_ID.get(pilihUser - 1));
+                                            System.out.println("Paket yang dibeli: " + DATA_PAKET.get(pilihPaket - 1));
                                             System.out.print("Apakah anda yakin?(Y/N) ");
-                                            String pilihan2 = input.read.readLine();
+                                            String pilihan2 = INPUT.READ.readLine();
                                             garisTepi();
                                             clearConsole();
                                             if (pilihan2.equalsIgnoreCase("y")) {
-                                                if (dataPelanggan.contains(user.dataId.get(pilihUser - 1))) {
-                                                    int i = dataPelanggan.indexOf(user.dataId.get(pilihUser - 1));
-                                                    for (int j = 0; j < dataValidasiPembelianPaket[i].length; j++) {
-                                                        if (dataValidasiPembelianPaket[i][j] == null) {
-                                                            dataValidasiPembelianPaket[i][j] = String.valueOf(dataPaket.get(pilihPaket - 1));
+                                                if (DATA_PELANGGAN.contains(USER.DATA_ID.get(pilihUser - 1))) {
+                                                    int i = DATA_PELANGGAN.indexOf(USER.DATA_ID.get(pilihUser - 1));
+                                                    for (int j = 0; j < DATA_VALIDASI_PEMBELIAN_PAKET[i].length; j++) {
+                                                        if (DATA_VALIDASI_PEMBELIAN_PAKET[i][j] == null) {
+                                                            DATA_VALIDASI_PEMBELIAN_PAKET[i][j] = String.valueOf(DATA_PAKET.get(pilihPaket - 1));
                                                             break;
                                                         }
                                                     }
                                                 } else {
-                                                    dataPelanggan.add(user.dataId.get(pilihUser - 1));
-                                                    int i = dataPelanggan.size() - 1;
-                                                    for (int j = 0; j < dataValidasiPembelianPaket[i].length; j++) {
-                                                        if (dataValidasiPembelianPaket[i][j] == null) {
-                                                            dataValidasiPembelianPaket[i][j] = String.valueOf(dataPaket.get(pilihPaket - 1));
+                                                    DATA_PELANGGAN.add(USER.DATA_ID.get(pilihUser - 1));
+                                                    int i = DATA_PELANGGAN.size() - 1;
+                                                    for (int j = 0; j < DATA_VALIDASI_PEMBELIAN_PAKET[i].length; j++) {
+                                                        if (DATA_VALIDASI_PEMBELIAN_PAKET[i][j] == null) {
+                                                            DATA_VALIDASI_PEMBELIAN_PAKET[i][j] = String.valueOf(DATA_PAKET.get(pilihPaket - 1));
                                                             break;
                                                         }
                                                     }
@@ -1552,7 +1870,18 @@ public class SayaTV {
         }
     }
 
-    static void infoKantor(boolean edit) throws IOException, InterruptedException {
+    /**
+     * Menampilkan info kantor berupa alamat, no rekening, dan no telepon kantor
+     *
+     * @param edit jika benar maka fitur mengubah info kantor akan aktif jika
+     * tidak maka kebalikannya
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
+    public static void infoKantor(boolean edit) throws IOException, InterruptedException {
         System.out.println("===============  Info Kantor  ================");
         if (alamatKantor != null) {
             do {
@@ -1560,14 +1889,14 @@ public class SayaTV {
                 System.out.format("- No. rekening kantor  : %s\n", noRekeningKantor);
                 System.out.format("- No. telepon kantor   : %s\n", noTelpKantor);
                 pilihanKembaliAtauUbah(true, edit, "Kembali", "===============  Info Kantor  ================");
-                while (kondisiPilihanKembaliAtauUbah1) {
+                while (kondisiPilihanUbah) {
                     System.out.println("===============  Info Kantor  ================");
                     System.out.print("- Alamat kantor baru       : ");
-                    String alamat = input.read.readLine();
+                    String alamat = INPUT.READ.readLine();
                     System.out.print("- No. rekening kantor baru : ");
-                    String noRekening = input.read.readLine();
+                    String noRekening = INPUT.READ.readLine();
                     System.out.print("- No. telepon kantor baru  : ");
-                    String noTelp = input.read.readLine();
+                    String noTelp = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
                     boolean kondisiInfoKantor = true;
@@ -1577,10 +1906,10 @@ public class SayaTV {
                         System.out.format("- No. rekening kantor baru : %s\n", noRekening);
                         System.out.format("- No. telepon kantor baru  : %s\n", noTelp);
                         System.out.print("Apakah anda yakin?(Y/N) ");
-                        String jawab = input.read.readLine();
+                        String apaYakin = INPUT.READ.readLine();
                         garisTepi();
                         clearConsole();
-                        if (jawab.equalsIgnoreCase("y")) {
+                        if (apaYakin.equalsIgnoreCase("y")) {
                             alamatKantor = alamat;
                             noRekeningKantor = noRekening;
                             noTelpKantor = noTelp;
@@ -1591,8 +1920,8 @@ public class SayaTV {
                             clearConsole();
                             System.out.println("===============  Info Kantor  ================");
                             kondisiInfoKantor = false;
-                            kondisiPilihanKembaliAtauUbah1 = false;
-                        } else if (jawab.equalsIgnoreCase("n")) {
+                            kondisiPilihanUbah = false;
+                        } else if (apaYakin.equalsIgnoreCase("n")) {
                             garisTepi();
                             System.out.println("Perubahan dibatalkan");
                             garisTepi();
@@ -1600,7 +1929,7 @@ public class SayaTV {
                             clearConsole();
                             System.out.println("===============  Info Kantor  ================");
                             kondisiInfoKantor = false;
-                            kondisiPilihanKembaliAtauUbah1 = false;
+                            kondisiPilihanUbah = false;
                         } else {
                             garisTepi();
                             pilihanTidakTersedia();
@@ -1611,7 +1940,7 @@ public class SayaTV {
                         }
                     } while (kondisiInfoKantor);
                 }
-            } while (kondisiPilihanKembaliAtauUbah);
+            } while (kondisiPilihanKembali);
         } else {
             System.out.println("Informasi kantor belum tersedia");
             garisTepi();
@@ -1620,15 +1949,25 @@ public class SayaTV {
         }
     }
 
+    /**
+     * Berisi instruksi utama yang akan dieksekusi
+     *
+     * @param args tidak ada
+     * @throws IOException memberikan pertanda jika terjadi pengecualian I/O
+     * yang terjadi
+     * @throws InterruptedException dilempar ketika thread berhenti sejenak,
+     * tidur atau apapun yang dapat menyebabkan kesalahan pada saat
+     * multithreading
+     */
     public static void main(String[] args) throws IOException, InterruptedException {
         clearConsole();
         pesanSelamatDatang();
         do {
             menuSelamatDatang();
-            while (user.autentikasi) {
-                menuUser(user.indeks);
+            while (USER.autentikasi) {
+                menuUser(USER.indeks);
             }
-            while (admin.autentikasi) {
+            while (ADMIN.autentikasi) {
                 if (alamatKantor == null) {
                     garisTepi();
                     System.out.println("Informasi kantor masih kosong");
@@ -1638,15 +1977,15 @@ public class SayaTV {
                     clearConsole();
                     garisTepi();
                     System.out.print("Alamat kantor sayaTV       : ");
-                    alamatKantor = input.read.readLine();
+                    alamatKantor = INPUT.READ.readLine();
                     System.out.print("No. rekening kantor sayaTV : ");
-                    noRekeningKantor = input.read.readLine();
+                    noRekeningKantor = INPUT.READ.readLine();
                     System.out.print("No. Telp kantor sayaTV     : ");
-                    noTelpKantor = input.read.readLine();
+                    noTelpKantor = INPUT.READ.readLine();
                     garisTepi();
                     clearConsole();
                 }
-                menuAdmin(admin.indeks);
+                menuAdmin(ADMIN.indeks);
             }
         } while (kondisiMain);
         pesanSempaiJumpa();
