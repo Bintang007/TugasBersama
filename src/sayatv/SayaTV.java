@@ -917,8 +917,8 @@ public class SayaTV {
                     tempDataPaketSaluranTV[i][j] = dataPaketSaluranTV[i][j];
                 }
             }
-            ArrayList tempDataHarga = new ArrayList(dataHarga);
-            ArrayList tempDataMasaAktifPaket = new ArrayList(dataMasaAktifPaket);
+            ArrayList<Integer> tempDataHarga = new ArrayList<>(dataHarga);
+            ArrayList<Integer> tempDataMasaAktifPaket = new ArrayList<>(dataMasaAktifPaket);
             boolean kondisiBeliPaket = true;
             boolean kondisiBeliPaket1 = true;
             do {
@@ -954,9 +954,9 @@ public class SayaTV {
                                         garisTepi();
                                         clearConsole();
                                         String tempPaket;
-                                        String tempHarga;
-                                        String tempMasaAktifPaket;
-                                        String[][] tempPaketSaluranTV = new String[100][100];
+                                        int tempHarga;
+                                        int tempMasaAktifPaket;
+                                        String[][] tempPaketSaluranTV = new String[1][1];
                                         switch (jawabBerdasarkan) {
                                             case 1:
                                                 garisTepi();
@@ -969,20 +969,20 @@ public class SayaTV {
                                                 break;
                                             case 2:
                                                 for (int i = 0; i < tempDataHarga.size() - 1; i++) {
-                                                    for (int j = i; j < tempDataHarga.size(); j++) {
-                                                        if (String.valueOf(tempDataHarga.get(i)).compareTo(String.valueOf(tempDataHarga.get(j))) < 0) {
+                                                    for (int j = i + 1; j < tempDataHarga.size(); j++) {
+                                                        if (Integer.valueOf(tempDataHarga.get(i)) < Integer.valueOf(tempDataHarga.get(j))) {
                                                             tempPaket = String.valueOf(tempDataPaket.get(j));
                                                             tempDataPaket.set(j, tempDataPaket.get(i));
                                                             tempDataPaket.set(i, tempPaket);
-                                                            for (int k = 0; k < tempPaketSaluranTV[j].length; k++) {
-                                                                tempPaketSaluranTV[j][k] = tempDataPaketSaluranTV[j][k];
+                                                            for (int k = 0; k < tempDataPaketSaluranTV[j].length; k++) {
+                                                                tempPaketSaluranTV[0][0] = tempDataPaketSaluranTV[j][k];
                                                                 tempDataPaketSaluranTV[j][k] = tempDataPaketSaluranTV[i][k];
-                                                                tempDataPaketSaluranTV[i][k] = tempPaketSaluranTV[j][k];
+                                                                tempDataPaketSaluranTV[i][k] = tempPaketSaluranTV[0][0];
                                                             }
-                                                            tempHarga = String.valueOf(tempDataHarga.get(j));
+                                                            tempHarga = Integer.valueOf(tempDataHarga.get(j));
                                                             tempDataHarga.set(j, tempDataHarga.get(i));
                                                             tempDataHarga.set(i, tempHarga);
-                                                            tempMasaAktifPaket = String.valueOf(tempDataMasaAktifPaket.get(j));
+                                                            tempMasaAktifPaket = Integer.valueOf(tempDataMasaAktifPaket.get(j));
                                                             tempDataMasaAktifPaket.set(j, tempDataMasaAktifPaket.get(i));
                                                             tempDataMasaAktifPaket.set(i, tempMasaAktifPaket);
                                                         }
@@ -993,20 +993,20 @@ public class SayaTV {
                                                 break;
                                             case 3:
                                                 for (int i = 0; i < tempDataHarga.size() - 1; i++) {
-                                                    for (int j = i; j < tempDataHarga.size(); j++) {
-                                                        if (String.valueOf(tempDataHarga.get(i)).compareTo(String.valueOf(tempDataHarga.get(j))) > 0) {
+                                                    for (int j = i + 1; j < tempDataHarga.size(); j++) {
+                                                        if (Integer.valueOf(tempDataHarga.get(i)) > Integer.valueOf(tempDataHarga.get(j))) {
                                                             tempPaket = String.valueOf(tempDataPaket.get(j));
                                                             tempDataPaket.set(j, tempDataPaket.get(i));
                                                             tempDataPaket.set(i, tempPaket);
-                                                            for (int k = 0; k < tempPaketSaluranTV[j].length; k++) {
-                                                                tempPaketSaluranTV[j][k] = tempDataPaketSaluranTV[j][k];
+                                                            for (int k = 0; k < tempDataPaketSaluranTV[j].length; k++) {
+                                                                tempPaketSaluranTV[0][0] = tempDataPaketSaluranTV[j][k];
                                                                 tempDataPaketSaluranTV[j][k] = tempDataPaketSaluranTV[i][k];
-                                                                tempDataPaketSaluranTV[i][k] = tempPaketSaluranTV[j][k];
+                                                                tempDataPaketSaluranTV[i][k] = tempPaketSaluranTV[0][0];
                                                             }
-                                                            tempHarga = String.valueOf(tempDataHarga.get(j));
+                                                            tempHarga = Integer.valueOf(tempDataHarga.get(j));
                                                             tempDataHarga.set(j, tempDataHarga.get(i));
                                                             tempDataHarga.set(i, tempHarga);
-                                                            tempMasaAktifPaket = String.valueOf(tempDataMasaAktifPaket.get(j));
+                                                            tempMasaAktifPaket = Integer.valueOf(tempDataMasaAktifPaket.get(j));
                                                             tempDataMasaAktifPaket.set(j, tempDataMasaAktifPaket.get(i));
                                                             tempDataMasaAktifPaket.set(i, tempMasaAktifPaket);
                                                         }
@@ -1391,6 +1391,7 @@ public class SayaTV {
                 garisTepi();
                 Thread.sleep(500);
                 clearConsole();
+                kondisiAddPaket = false;
             } else {
                 System.out.print("Nama paket: ");
                 data.paket = input.read.readLine();
